@@ -1,0 +1,77 @@
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%} class {% endblock	%}
+{% block panel%} Assign {%endblock%}
+{% block style %}
+
+{% endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+<div class="col-md-12">
+    <div class="card card-profile">
+        <div class="card-header card-header-primary">
+         
+            <h2 class="card-title"> BATCH {{batch}} {{request.user.profile.department.upper}}  {{sem}} {{sec}}  </h2>
+        </div>
+      <div class="card-body">
+       
+      <form class="login-form" method="POST" action="{% url 'tg_updated'%}" enctype="multipart/form-data">
+         <div class="row">
+            <div class="col-md-4">
+                <label class="bmd-label-floating">Current Teacher</label><br>
+                <h6 class="form-control"> {{tea.username}}</h6>
+                <input type="hidden" value="{{tea}}" name="teachers">
+                  <input type="hidden" value="{{sem}}" name="sem">
+                  <input  type="hidden" value="{{batch}}" name="batch"  required />
+                  <input type="hidden" value="{{sec}}" name="sec">
+              
+            </div>
+     <div class="col-md-8">
+        <div class="form-group">
+          <label class="bmd-label-floating">Teacher</label>
+    <select id="role" name="teacher" class="form-control" required >
+              {%for t in teacher%}  
+             
+              <option value="{{t.username}}" data-img_src="media/{{t.profile.photo}}/" >
+                  {{t.first_name}} {{t.last_name}}
+              </option>
+             {% endfor %}       
+          </select>
+        
+        </div>
+        </div>
+      
+         </div>
+         <button type="submit" class="btn btn-primary pull-right" >Update</button>
+         
+            
+
+              
+    {%	csrf_token	%}
+            </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+{% endblock%}
+
+
+  

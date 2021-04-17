@@ -1,0 +1,110 @@
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%}attendance{%	endblock	%}
+{%block style%}
+
+{%endblock%}
+{%	block	panel	%} Subject Attendance{%	endblock	%}
+{%	block	content	%}
+{% include 'messages.html' %}
+{% include 'hod/student/student_dash.html' %}
+
+  <div class="row">
+<div class="card-body">
+   
+    <div class="form" >
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Subject Attendance</h4>
+      </div>
+      <form class="login-form" method="POST" action="{% url 'hod_student_subject_attendance' student.enrollment%}" enctype="multipart/form-data">
+       
+        <div>
+          <br>
+            <label for="cars">Semester</label>
+            <select id="role" class="form-control" name="sem" required>
+                <option value="1">I</option>
+                <option value="2">II</option>
+                <option value="3">III</option>
+                <option value="4">IV</option>
+                <option value="5">V</option>
+                <option value="6">VI</option>
+                <option value="7">VII</option>
+                <option value="8">VIII</option>
+                
+            </select>
+
+        </div>
+
+    
+       <button type="submit" class="btn btn-primary" >Attendance</button>
+        
+        {%	csrf_token	%}
+      </form>
+    </div>
+  </div>
+  </div>
+
+
+
+ {% if object_list%}
+
+
+       
+<div class="row">
+  <div class="col-md-12">
+    <div class="card-header card-header-primary">
+        <h4 class="card-title ">
+          {{student.branch.upper}} {{student.sec}} {{object_list.0.0.sem}}  sem
+     
+        </h4> 
+      </div>
+     <div class="card">
+       <div class="card-header card-header-primary">
+         <h4 class="card-title ">Subject Attendance</h4> 
+        
+        
+       </div>
+       <div class="card-body">
+         <div class="table-responsive">
+           <table class="table">
+             <thead class=" text-primary">
+              <th>Subject</th>
+              <th> Attend</th>
+              <th>Total Attend</th>
+              <th> Attendance</th>
+              <th>Class to Attend</th>
+
+              
+             </thead>
+             <tbody>
+               
+              {% for sub,att_class,total_class,attendance,cta in object_list %}
+           
+              <tr>
+             
+              <td>{{sub.subject_name}}</td>
+              <td>{{att_class}}</td>
+              <td>{{total_class}}</td>
+             
+                  <td >{{attendance}}</td>
+              <td>{{cta}}</td>
+              
+              </tr>
+              
+   
+          {% endfor %}
+             </tbody>
+           </table>
+         </div>
+       </div>
+     </div>
+   </div>
+  </div>
+ 
+
+
+
+
+{% endif %}
+
+        {%endblock%}

@@ -1,0 +1,106 @@
+{%	extends	"abase.html"	%}
+{% block style%}
+img {
+    border-radius: 50%;
+  }
+{% endblock %}
+
+{%	block	title	%}website menu{%	endblock	%}
+ {% block panel %}Website Settings{% endblock%}
+{%	block	content	%}
+		
+{% include 'messages.html' %}
+
+<div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">website</i>
+                  </div>
+                  <p class="card-category">Home Bottom</p>
+        
+                  <ul>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      
+                       <h3 class="card-title">Footer</h3>
+                      
+                      </a>
+                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
+                      <a class="dropdown-item" href="#">Social Network</a>
+                      <a class="dropdown-item" href="#">Downloads</a>
+                      <a class="dropdown-item" href="#">Quick Link</a>
+                      <a class="dropdown-item" href="#">Suggested Links</a>
+                      <a class="dropdown-item" href="#">Sister Concerns</a>
+                    </div>
+                    </li>
+                  </ul>
+
+            
+                </div>
+                <div class="card-footer" style="margin-top: 0px;">
+                  <div class="stats">
+                    <i class="material-icons">add</i> 
+                    <a href="{%url "footer_link" %}">add</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">store</i>
+                  </div>
+                 
+                  <p class="card-category">Home</p>
+                  <h3 class="card-title">Carausal</h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">date_range</i> 
+                    <a href="{%url "carausal" %}">carausal</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-danger card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">info_outline</i>
+                  </div>
+                  <p class="card-category">daily</p>
+                  <h3 class="card-title">Attendance</h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">local_offer</i> 
+                    <a href="#">see</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-info card-header-icon">
+                  <div class="card-icon">
+                    <i class="fa fa-twitter"></i>
+                  </div>
+                  <p class="card-category">Followers</p>
+                  <h3 class="card-title">+245</h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <i class="material-icons">update</i> Just Updated
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+
+
+{%	endblock	%}

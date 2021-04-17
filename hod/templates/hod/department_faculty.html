@@ -1,0 +1,59 @@
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%}faculty {% endblock	%}
+{% block style %}
+{% endblock%}
+{% block panel%}Faculty{%endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+
+    {%if faculty %}
+
+
+    <div class="row">
+     
+      <div class="col-md-12">
+        
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title "> Faculty In {{ request.user.profile.department.upper }} Department</h4>
+           
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Mobile No</th>
+                <th >Email</th>
+                <th>Address</th>
+                <th>Pincode</th>
+                <th>Join Date</th>
+                </thead>
+                <tbody>
+                  {% for f in faculty %}
+                <tr>
+                    <td><img src="/media/{{f.profile.photo}}/"class="rounded mx-auto d-block" width="100px" height="100px"></td>
+                <td>{{f.first_name.upper}} {{f.first_name.upper}}</td>
+               <td>{{f.profile.contact_no}}</td>
+               <td>{{f.email}}</td>
+               <td>{{f.profile.city_town_area}} {{f.profile.District}} {{f.profile.state}} {{f.profile.country}} </td>
+               <td>{{f.profile.pincode}}</td>
+               <td>{{f.profile.join_date}}</td>
+                </tr>
+                {% endfor %}
+          
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+    
+      </div>
+      {% endif%}
+    
+
+{%endblock%}

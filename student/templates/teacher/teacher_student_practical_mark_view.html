@@ -1,0 +1,55 @@
+{% extends "tbase.html" %} {% block title %}practical {% endblock %} {% block style %}
+ {% endblock%} 
+ {%block panel%}Student Practical Mark{%endblock%}
+ {% block content %}
+ {% include 'messages.html' %}
+        {% if mark%}
+        
+         
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title ">
+                        Student - {{student.enrollment.upper}}  Name - {{student.first_name.upper}} {{student.last_name.upper}}
+                    </h4>   
+            </div>
+          <div class="card">
+              <div class="card-header card-header-primary">
+                  <h4 class="card-title ">
+                    Class {{request.user.profile.department.upper}} {{student.sem}} {{student.sec}} &nbsp;
+                    Subject - {{subject_id.subject_name}} {{subject_id.subject_code}} ({{subject_id.subject_type}})
+                  </h4>   
+          </div>
+        
+             <div class="card-body">
+               <div class="table-responsive">
+                 <table class="table">
+                   <thead class=" text-primary">
+                    <th>Practical No</th>
+                    <th> Total Mark</th>
+                    <th> Obtain Mark</th>
+                     <th>Update</th>
+                   </thead>
+                   <tbody>
+                    {% for m in mark%}
+                    <tr>
+                        
+                       
+                    <td>{{m.practical_no}}</td>
+                    <td>{{m.total_mark}}</td>
+                    <td>{{m.obtain_mark}}</td>
+                    <td><a class="btn btn-primary" role="button" href="{% url "teacher_student_practical_mark_update" student.enrollment subject_id.subject_code m.practical_no  %}">edit</a></td>
+                    </tr>
+                  {% endfor%}
+  
+                   </tbody>
+                 </table>
+               </div>
+             </div>
+           </div>
+         </div>
+       
+       {%endif%}
+      </div>
+    
+        {%endblock %}

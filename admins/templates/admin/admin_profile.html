@@ -1,0 +1,115 @@
+
+            {%	extends	"abase.html"	%}
+            {% block style%}
+            img {
+                border-radius: 50%;
+              }
+            {% endblock %}
+            
+            {%	block	title	%}admin profile{%	endblock	%}
+            {% block panel %}Profile{% endblock%}
+            {%	block	content	%}
+                    
+            {% include 'messages.html' %} 
+                
+                <div class="row">
+                    <div class="col-md-8">
+                      <div class="card">
+                        <div class="card-header card-header-primary">
+                          <h4 class="card-title">My Profile</h4>
+                          <p class="card-category">Complete about me</p>
+                        </div>
+                        <div class="card-body">
+                          <form>
+                            <div class="row">
+                              <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Username</label>
+                                   -  {{request.user.username}}
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="bmd-label-floating">Name</label>
+                                 - {{request.user.first_name.upper}} {{request.user.last_name.upper}}
+                                </div>
+                              </div>
+                              <div class="col-md-5">
+                                <div class="form-group">
+                                  <label class="bmd-label-floating">Email </label>
+                                 - {{request.user.email}}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-3">
+                                <div class="form-group">
+                                  <label class="bmd-label-floating">Conatct</label>
+                          
+                                  - {{request.user.adminprofile.contact_no}}
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="bmd-label-floating">Date of Birth</label>
+                                  - {{request.user.adminprofile.date_of_birth}}
+                                </div>
+                              </div>
+                              <div class="col-md-5">
+                                <div class="form-group">
+                                  <label class="bmd-label-floating">Date of Jioning</label>
+                                  - {{request.user.adminprofile.join_date}}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-8">
+                                <div class="form-group">
+                                  <label class="bmd-label-floating">Adress</label>
+                                  {{request.user.adminprofile.city_town_area}}
+                                  {{request.user.adminprofile.District}}
+                                  {{request.user.adminprofile.state}}
+                                  {{request.user.adminprofile.country}}
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="bmd-label-floating">Postal Code</label>
+                                  {{request.user.adminprofile.pincode}}
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <label>About Me</label>
+                                  <div class="form-group">
+                                 faculty in {{request.user.adminprofile.department}} department
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="card card-profile">
+                        <div class="card-avatar">
+                   
+                            <img class="img" src="/media/{{request.user.adminprofile.photo}}/"  />
+                      
+                        </div>
+                        <div class="card-body">
+                          <h6 class="card-category text-gray">{{request.user.adminprofile.role.upper}} of SIRTS</h6>
+                          <h4 class="card-title">{{request.user.first_name.upper}} {{request.user.last_name.upper}}</h4>
+                          
+                        </div>
+                        <button class="btn btn-info"> <a style="color: white;"href="{%	url	"admin_edit"	%}"><i class="fa fa-user-circle-o"></i> Edit Profile </a></button>
+                        <button class="btn btn-primary"><a style="color: white;" href="{%	url	"admin_pass_change"	%}"><i class="fa fa-lock"></i> Change password</a></button>
+                      </div>
+                    </div>
+                  
+            {%	endblock	%}
+

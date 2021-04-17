@@ -1,0 +1,96 @@
+{%	extends	"tbase.html"	%}
+{%	block	title	%}add Student{%	endblock	%}
+{%	block	content	%}	
+
+{% include 'messages.html' %}
+
+{% load static%}
+
+
+{% if added%}
+
+<div class="row">
+          
+  <div class="col-md-8">
+    <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title"> following are added successfully </h4>
+        </div>
+        {% for i in added %}
+        <p style="text-align: center;color:greem;">{{i}}</p>
+        {%endfor%}
+    </div>
+  </div>
+</div>
+      
+{% endif%}
+
+{% if already%}
+<div class="row">
+          
+  <div class="col-md-8">
+    <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title"> following are already added  data</h4>
+        </div>
+        {% for i in already %}
+        <p style="text-align: center;color:magenta;">{{i}}</p>
+        {%endfor%}
+    </div>
+  </div>
+</div>
+{% endif%}
+
+{% if invalid %}
+<div class="row">
+          
+  <div class="col-md-8">
+    <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title"> following are in invalid format data</h4>
+        </div>
+        {% for i in invalid %}
+        <p style="text-align: center;color:red;">{{i}}</p>
+        {%endfor%}
+    </div>
+  </div>
+</div>
+
+{% endif%}
+
+
+
+<div class="row">
+          
+  <div class="col-md-8">
+    <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title">Import Student </h4>
+          <p>Must have these fields enrollment, first_name, last_name, Email, phone, photo, dob, gender, batch, branch, sem, sec,active</p>
+          </div>
+      <div class="card-body">
+        <form	action="{% url "add_student_excel"%}" 	method="post" enctype="multipart/form-data">
+   <div class="row">
+        
+          
+         <div class="col-md-12">
+          <div class="form-group">
+            <label class="bmd-label-floating">Import Excel <img src="{% static 'excel.ico' %}" width="50px" height="30px"></label>
+            <input  type="file" name="excel" required class="form-control">
+      
+          </div>
+          <button type="submit" class="btn btn-primary pull-right" ><i class="fa fa-upload"></i> import Student</button>
+ </div>    
+           
+              
+              
+    {%	csrf_token	%}
+            </form>
+      </div>
+    </div>
+  </div>
+  
+  </div>
+  
+
+{%endblock%}

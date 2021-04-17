@@ -1,0 +1,66 @@
+{%	extends	"base.html"	%}
+{%	block	title	%}student login{%	endblock	%}
+
+{% block script%}
+
+{%endblock%}
+{%block style%}
+.center{
+  margin:auto;
+margin-top:50px;
+ max-width:500px;
+}
+{%endblock%}
+
+
+
+{%	block	content	%}
+
+{% include 'messages.html' %}
+    
+<div class="center">
+
+      <div class="card ">
+
+        <div class="card-header card-header-primary">
+          <h4 class="card-title">Student Login</h4>
+      
+        </div>
+  
+        <div class="card-body">
+          <form  method="post" action="{%	url	'student_login'	%}"	>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <input	type="hidden"	name="next"	value="{{	next	}}"	/>	
+                  {%	csrf_token	%}	
+                  <label class="bmd-label-floating">Username</label>
+                  <input  type="text" name="username"required class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Password</label>
+                  <input  type="password" name="password"required class="form-control">
+                </div>
+              </div>
+            </div>
+              <p class="message"><a	href="{%	url	"password_reset"	%}">Forgotten your password?</a></p>
+        <p class="message">Not registered? <a href="{% url "student_register"%}">Create an account</a></p>
+      
+              
+       <button class="btn btn-primary pull-right" type="submit" >Login</button>
+              
+             
+              
+              
+            </form>
+         
+
+      </div>
+    </div>
+
+
+  {%	endblock	%}

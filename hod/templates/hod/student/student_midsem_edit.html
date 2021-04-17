@@ -1,0 +1,44 @@
+{%	extends	"hbase.html"	%}
+{% block style%}
+{% endblock %}
+
+{%	block	title	%}student result{%	endblock	%}
+{%block panel%}Student Mark {%endblock%}
+{%	block	content	%}
+
+{% include 'messages.html' %}
+
+{% include 'hod/student/student_dash.html' %}
+
+
+
+<div class="row">
+  <div class="card-body">
+     
+      <div class="form" >
+        <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title"> Update Sem {{sem}} {{midterm}} Mark</h4>
+        </div>
+      
+        <form class="login-form" method="POST" action="{%url "hod_student_midsem_edit"	student.enrollment sem midterm	%}" enctype="multipart/form-data">
+          <div>
+            <br>
+            <br>
+  
+          <input type="text" name="total_mark" placeholder="Total Mark"required/>
+          <input type="text" name="obtain_mark"placeholder="Obtain Mark" required/>
+
+          <button type="submit" class="btn btn-primary">Update</button>
+          
+          {%	csrf_token	%}
+        </form>
+     
+    
+  </div>
+</div>
+</div>
+
+{%endblock%}
+    
+    

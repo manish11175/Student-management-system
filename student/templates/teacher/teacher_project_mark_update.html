@@ -1,0 +1,52 @@
+
+{%	extends	"tbase.html"	%}
+{%	block	title	%}marks {% endblock	%}
+{% block style %}
+
+{% endblock%}
+{%block panel%}Student Project Mark {%endblock%}
+{%	block	content	%}		
+{% include 'messages.html' %}
+
+     <div class="row">
+ 
+        <div class="col-md-6">
+            <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title ">
+                        Update {{student.enrollment}} Project Mark
+                    </h4> 
+                    <p>Subject - {{subject_id.subject_name}} ({{subject_id.subject_code}}) {{subject_id.subject_type}}</p>
+                  </div>
+                  <form class="form-inline" action="{% url 'teacher_project_mark_update' student.enrollment subject_id.subject_code %}" method="POST">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                  <label class="bmd-label-floating">Obtain Mark</label>
+                                  <input type="number" name="obtain_mark" class="form-control" required>
+                                </div>
+                              </div>
+                            </div>
+                        <button class="btn btn-primary pull-right" type="submit">Submit</button>
+                      </div>
+                      {% csrf_token %} 
+                      </form>
+                      
+                    </div>
+                  </div>
+                </div>
+               
+              
+
+
+
+
+
+
+
+{%endblock %}
+
+
+
+

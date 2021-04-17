@@ -1,0 +1,131 @@
+
+{%	extends	"tbase.html"	%}
+{%	block	title	%}teacher subject {% endblock	%}
+{% block style %}
+
+{% endblock%} 
+{%block panel%} Student Attendance{%endblock%}
+{%	block	content	%}		
+
+{% include 'messages.html' %}
+        
+{% if student%}
+
+
+
+<form method="post" action="{% url "teacher_subject_mark" subject_id.subject_code  sem sec %}">  
+  {% csrf_token %}
+
+<div class="row">
+ 
+  <div class="col-md-12">
+    <div class="card">
+    <div class="card-header card-header-primary">
+      <h4 class="card-title ">
+        Subject Unit Mark
+      </h4> 
+    </div>
+    <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title ">
+            Class {{request.user.profile.department.upper}} {{sem}} {{sec}} &nbsp;&nbsp;
+            Subject - {{subject_id.subject_name}} {{subject_id.subject_code}} ( {{subject_id.subject_type}} )
+          </h4> 
+        </div>
+      <div class="card-body">
+          
+      <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+              <label class="bmd-label-floating"> Unit No</label>
+              <input type="number" name="unit_no" class="form-control"required>
+            </div>
+          </div>
+        <div class="col-md-3">
+            <div class="form-group">
+              <label class="bmd-label-floating">Exam Type </label>
+              <select name="exam_type"  class="form-control"required> 
+                <option value="tutorial">Tutorial</option>
+                <option value="test">Test</option>
+            </select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="bmd-label-floating"> Exam No</label>
+              <select name="exam_no" class="form-control" required> 
+                <option value="1">I</option>
+                <option value="2">II</option>
+            </select>
+            </div>
+          </div>
+          
+        <div class="col-md-3">
+          <div class="form-group">
+            <label class="bmd-label-floating">Total Mark</label>
+            <input  type="number" name="total_mark"  class="form-control" required />
+          </div>
+        </div>
+     
+      </div>
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+                <th>Enrollment</th>
+                <th>Student name</th>
+                <th>Obtain Mark</th>
+            </thead>
+            <tbody>
+                    
+                {% for s in student %}
+                <tr>
+                    <td>{{s.enrollment.upper}}</td>
+                <td>{{s.first_name.upper}} {{s.last_name.upper}}</td>
+                <td>
+                    <div class="form-group">
+                        <input type="number" name="{{ s.enrollment }}" required>
+                      </div>
+             
+                </td>
+                </tr>
+        
+            {% endfor %}
+        
+  
+         
+       
+            </tbody>
+           
+          </table>
+        </div>
+        <td> <button class="btn btn-primary pull-right" type="submit">Submit</button></td>
+      </div>
+    </div>
+  </div>
+ 
+</div>
+  </div>
+
+  </form>
+{% else%}
+<div class="row">
+ 
+  <div class="col-md-12">
+    <div class="card-header card-header-primary">
+      <h4 class="card-title ">
+        Subject - {{subject_id.subject_name}} {{subject_id.subject_code}} ( {{subject_id.subject_type}} )   
+      </h4> 
+    </div>
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title ">  No Student Found !  </h4>
+       
+      </div></div></div></div>
+  {% endif%}
+
+
+{%endblock %}
+
+
+
+

@@ -1,0 +1,77 @@
+{%	extends	"user/ubase.html"	%}
+{% block style%}
+
+{% endblock %}
+
+
+{%	block	title	%}tgcall {%	endblock	%}
+{% block panel%} Tutor Guardian{%endblock%}
+
+
+{%	block	content	%}
+{% include 'messages.html' %}
+  <div class="mx-2 my-2" align="center">
+    {% if messages %}
+    <ul	class="messages">
+    {%	for	message	in	messages	%}						
+    <p	align="center" style="color: white;">{{	message	}}</p>								
+                                      
+                      
+      {%	endfor	%}		
+    </ul> 
+    {%	endif %}
+    
+    </div>
+    
+
+{% if object_list%}
+
+
+<div class="row">
+ 
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title ">Tg calls</h4>
+       
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>Enrollment</th>
+      <th>Sem</th>
+      <th>Date</th>
+      <th>Contact No</th> 
+      <th>Contact Person</th>
+      <th>Reason Of Caliing</th>
+      <th>Description</th>
+      <th>Faculty</th>
+            </thead>
+            <tbody>
+              {% for student in object_list %}
+              <tr>
+                <td> {{student.enrollment}} </td>
+                <td> {{student.sem}} </td>
+                <td> {{student.date}} </td>
+                <td> {{student.contact_no}} </td>
+                <td> {{student.contact_person}} </td>
+                <td> {{student.reason}} </td>
+                <td> {{student.description}} </td>
+                <td>{{student.faculty}}</td>
+              </tr>
+              {% endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+
+  </div>
+  {% endif%}
+
+{%endblock%}
+    
+    

@@ -1,0 +1,58 @@
+{% extends "tbase.html" %} {% block title %} project mark {% endblock %} {% block style %}
+
+
+{% endblock%} 
+{%block panel%}
+Student Project Mark
+{%endblock%}
+{% block content %}
+    
+{% include 'messages.html' %}
+
+ {% if mark%}
+        
+        <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+              <div class="card-header card-header-primary">
+                  <h4 class="card-title ">
+                    Class {{request.user.profile.department.upper}} {{sem}} {{sec}} &nbsp;&nbsp;
+                    Subject - {{subject_id.subject_name}} {{subject_id.subject_code}} ({{subject_id.subject_type}})
+                  </h4>   
+          </div>
+        
+             <div class="card-body">
+               <div class="table-responsive">
+                 <table class="table">
+                   <thead class=" text-primary">
+                    <th>Enrollment</th>
+                    <th>Student name</th>
+                   <th>Total Mark</th>
+                   <th>Obtain Mark</th>
+                   <th>Edit</th>
+                   </thead>
+                   {% for m in mark%}
+                        <tr>
+                        <td>{{m.student_id.enrollment.upper}}</td>
+                        <td>{{m.student_id.first_name.upper}} {{m.student_id.last_name.upper}}</td>
+                        <td>{{m.total_mark}}</td>
+                        <td>{{m.obtain_mark}}</td>
+                        <td><a class="btn btn-primary" role="button" href="{% url "teacher_project_mark_update" m.student_id.enrollment subject_id.subject_code%}">edit</a></td>
+    
+                 
+                    </tr>
+    
+                    {%endfor%}
+    
+  
+                   </tbody>
+                 </table>
+               </div>
+             </div>
+           </div>
+         </div>
+        </div>
+       {%endif%}
+        
+    
+        {%endblock %}

@@ -1,0 +1,32 @@
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%}new bacth {% endblock	%}
+{% block style %}
+{% endblock%}
+{%	block	content	%}		
+{% include 'messages.html' %}
+
+  
+   
+  <div class="card-body">
+    <div class="form">
+    <h2 align="center">New Batch In {{request.user.profile.department.upper}}</h2><br>
+   
+    <form class="login-form" method="POST" action="{% url 'start_new_batch'%}" enctype="multipart/form-data">
+
+    <input type="number" name="batch" placeholder="Batch" required> 
+
+      <button type="submit" class="btn btn-primary" >Start Batch</button>
+      
+      {%	csrf_token	%}
+    </form>
+  </div>
+
+</div>
+
+
+
+
+{%endblock %}
+
+

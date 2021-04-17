@@ -1,0 +1,120 @@
+{%	extends	"tbase.html"	%}
+{% block style%}
+{% endblock %}
+
+{%	block	title	%}student result{%	endblock	%}
+{%	block	content	%}
+{% include 'messages.html' %}
+
+{% include 'hod/student/student_dash.html' %}
+
+
+
+  
+    {% if object_list%}
+
+
+    <div class="row">
+     
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Student University Result</h4>
+           
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>Semester</th>
+                  <th>Result</th>
+                  <th>SGPA</th>
+                  <th>CGPA</th>
+                  <th>Backlog</th>
+                  <th>Update</th>
+                </thead>
+                <tbody>
+                  {% for result in object_list %}
+                  <tr>
+                    <td> {{result.sem}} </td>
+                    <td> {{result.result}} </td>
+                    <td> {{result.sgpa}} </td>
+                      <td> {{result.cgpa}} </td>
+                      <td> {{result.if_fail}} </td>
+                      <td><a class="btn btn-primary" href="{% url "hod_student_result_edit" student.enrollment result.sem %}" role="button">EDIT</a></td>
+                  </tr>
+          
+               
+                  {% endfor%}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+    
+      </div>
+      {% endif%}
+    
+    
+    
+    
+    
+    
+
+ <div class="row">
+    <div class="card-body">
+       
+        <div class="form" >
+          <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">Semester Mark</h4>
+          </div>
+    <form class="login-form" method="POST" action="{%url "hod_student_result"	student.enrollment	%}" enctype="multipart/form-data">
+       
+        <div>
+            <label for="cars">Semester</label>
+            <select id="role" name="sem" class="form-control" required>
+                <option value="1">I</option>
+                <option value="2">II</option>
+                <option value="3">III</option>
+                <option value="4">IV</option>
+                <option value="5">V</option>
+                <option value="6">VI</option>
+                <option value="7">VII</option>
+                <option value="8">VIII</option>
+                
+            </select>
+
+        </div>
+
+        
+        <div>
+            <label for="result">Result Status</label>
+            <select id="role" name="result" class="form-control" required>
+                <option value="pass">Pass</option>
+                <option value="fail">Fail</option>
+                
+            </select>
+
+        </div>
+        <input type="text" name="sgpa" placeholder="SGPA"required/>
+        <input type="text" name="cgpa"placeholder="CGPA" required/>
+        <label for="fail">If Fail</label>
+        <input type="text" name="if_fail" placeholder="Subject Code with Space" required/>
+        <label>Marksheet</label>
+        <input type="file" name="marksheet" required/>
+        <button type="submit" class="btn btn-primary">Save Result</button>
+        
+        {%	csrf_token	%}
+      </form>
+   
+    </div>
+  </div>
+    </div>
+
+  
+{%endblock%}
+    
+    

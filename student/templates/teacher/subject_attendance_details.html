@@ -1,0 +1,81 @@
+
+{%	extends	"tbase.html"	%}
+{%	block	title	%}attendance details {% endblock	%}
+{% block style %}
+
+{% endblock%}
+{%block panel%}Student Attendance{%endblock%}
+{%	block	content	%}		
+
+{% include 'messages.html' %}
+
+
+{% if attend %}
+      
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title ">
+                  Enrollment - {{student.enrollment.upper}} Name-{{student.first_name.upper}} {{student.first_name.upper}}
+                </h4> 
+              </div>
+              <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title ">
+                      {{student.branch.upper}} {{student.sem}} {{student.sec}}   Subject- {{subject.subject_name}} ({{subject.subject_code}})
+                    </h4> 
+                  </div>
+           <div class="card-body">
+             <div class="table-responsive">
+               <table class="table">
+                 <thead class=" text-primary">
+                  <th>S.NO</th>
+            <th>Date</th>
+            <th>Day</th>
+            <th> Status</th>
+            <th>Edit Attendance</th>
+         
+                  
+                 </thead>
+                 <tbody>
+                  {% for a in attend %}
+           
+                  <tr>
+                  <td>{{ forloop.counter }}</td>
+                  <td>{{a.date}}</td>
+                  <td>{{ a.date|date:"l" }}</td>
+                  {% if a.attend > 0.5 %}
+                      <td class="p-3 mb-2 bg-success text-white">{{ a.attend }}</td>
+                  {% elif a.attend == 0.5 %}
+                    <td class="p-3 mb-2 bg-warning text-black">{{ a.attend }}</td>
+                  {% else %}
+                      <td class="p-3 mb-2  bg-danger text-white">{{ a.attend }}</td>
+                  {% endif %}
+                  <td align="center">              
+                    
+                     
+                        <button class="btn btn-primary"><a style="color: white;" href="{% url 'subject_attendance_update' student.enrollment subject.subject_code a.date %}">edit</a></button>
+               
+                   
+                   
+              </td>
+      
+                  </tr>
+      
+              {% endfor %}
+                 </tbody>
+               </table>
+             </div>
+           </div>
+         </div>
+       </div>
+      </div>
+     {%endif%}
+    
+
+{%endblock %}
+
+
+
+

@@ -1,0 +1,128 @@
+{%	extends	"hbase.html"	%}
+{% block style%}
+
+{% endblock %}
+{%block panel%}Student Bank{%endblock%}
+
+{%	block	title	%}student bank {%	endblock	%}
+{%	block	content	%}
+{% include 'messages.html' %}
+
+{% include 'hod/student/student_dash.html' %}
+
+
+
+    
+    {% if bank%}
+
+
+    <div class="row">
+     <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Student Bank</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                    <th>Name of Bank </th>
+                    <th>Branch</th>
+                    <th>Account Number</th>
+                    <th>IFSC Code</th>
+                    <th>Account Holder Name</th>
+                    <th>Aadhar Card number</th>
+                </thead>
+                <tbody>
+                  
+                 
+                  <tr>
+                    <td> {{bank.bank_name.upper}} </td>
+                    <td> {{bank.bank_branch.upper}} </td>
+                    <td> {{bank.bank_ac}} </td>
+                    <td> {{bank.bank_ifsc.upper}} </td>
+                    <td> {{bank.ac_hold_name.upper}} </td>
+                    <td> {{bank.aadhar_no}} </td> 
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+     </div>
+    
+      
+    
+
+  {%else%}
+
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Student Bank</h4>
+                  
+                </div>
+                <div class="card-body">
+                  <form class="login-form" method="post" action="{%url "hod_student_bank"	student.enrollment	%}">
+                    <div class="row">
+
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Bank Name</label>
+                          <input type="text" name="bank_name" class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating"> Bank Branch</label>
+                          <input type="text"  name="bank_branch" class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Bank Account</label>
+                          <input type="text"  name="bank_ac" class="form-control" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">Bank IFSC</label>
+                              <input type="text"  name="bank_ifsc" class="form-control" required>
+                            </div>
+                          </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">Account Holder</label>
+                              <input type="text"  name="ac_hold_name" class="form-control" required>
+                            </div>
+                          </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Aadhar No</label>
+                          <input type="text" name="aadhar_no" class="form-control" required>
+                        </div>
+                      </div>
+                      
+                     
+                     
+                    </div>
+  
+  
+      <button type="submit" class="btn btn-primary pull-right" >Save</button>
+      
+      {%	csrf_token	%}
+    </form>
+ 
+
+</div>
+</div>
+</div>
+
+{% endif%}
+{%endblock%}
+    
+    

@@ -1,0 +1,63 @@
+{% extends "tbase.html" %} {% block title %} project mark {% endblock %} 
+    {% block panel%}
+    Project
+     {% endblock%}
+    {% block content %}
+    {% include 'messages.html' %}
+    {% include 'students/manage/student/student_dash.html' %}
+    
+        {% if mark%}                   	
+
+
+
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title ">
+                 Class {{student.branch.upper}} {{student.sem}} {{student.sec}}&nbsp;&nbsp;&nbsp;
+                   Subject - {{subject_id.subject_name}} {{subject_id.subject_code}} ({{subject_id.subject_type}})
+                </h4>
+              </div>
+             <div class="card">
+               <div class="card-header card-header-primary">
+                 <h4 class="card-title ">Project Mark</h4> 
+                
+                
+               </div>
+               <div class="card-body">
+                 <div class="table-responsive">
+                   <table class="table">
+                     <thead class=" text-primary">
+                        <th>Total Mark</th>
+                        <th>Obtain Mark</th>
+                      
+                     </thead>
+                     <tbody>
+                       
+                        <tr>
+                            {% for m in mark%}
+                        
+                            <td>{{m.total_mark}}</td>
+                            <td>{{m.obtain_mark}}</td>
+                            
+                        </tr>
+        
+                        {%endfor%}
+                     </tbody>
+                   </table>
+                 </div>
+               </div>
+             </div>
+           </div>
+          </div>
+         
+        
+        
+        
+        
+        {% endif %}
+    
+        {%endblock %}
+        

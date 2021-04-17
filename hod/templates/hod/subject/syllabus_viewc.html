@@ -1,0 +1,73 @@
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%}syllabus{% endblock	%}
+{% block style %}
+
+{% endblock%}
+ {% block panel%} Syllabus{%endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+
+{% if syllabus%}
+
+
+    <div class="row">
+      
+
+      <div class="col-md-12">
+      
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Syllabus in {{request.user.profile.department.upper}} &nbsp;&nbsp;&nbsp;&nbsp;Year :- {{year}}</h4>
+           
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                    <th>Sem</th>
+      <th>Syllabus</th>
+    
+     
+                </thead>
+                <tbody>
+                 
+                    {% for s in syllabus %}
+                    <tr>
+                  
+                    <td>{{s.sem}}</td>
+                    <td><button class="btn btn-primary"><a style="color:white;" href="/media/{{s.file}}"> <i class="fa fa-eye"></i> view Syllabus</a></button></td>
+                    
+                    </tr>
+              
+              {% endfor%}     
+            
+             
+
+               </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      </div>
+      {%else%}
+      <div class="row">
+     
+        <div class="col-md-12">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">
+                Syllabus in {{request.user.profile.department.upper}} &nbsp;&nbsp;&nbsp;&nbsp;Year :- {{year}}
+            </h4> 
+          </div>
+          <div class="card">
+            <div class="card-header card-header-primary">
+              <h4 class="card-title ">No Syllabus Found !</h4>
+             
+            </div></div></div></div>
+      {% endif%}
+
+
+{% endblock%}

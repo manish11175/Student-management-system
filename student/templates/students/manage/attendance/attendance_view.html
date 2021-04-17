@@ -1,0 +1,149 @@
+{%	extends	"tbase.html"	%}
+{%	block	title	%}My students {% endblock	%}
+{% block style %}
+
+{% endblock%}
+{%block panel%}TG Attendance{%endblock%}
+{%	block	content	%}		
+
+{% include 'messages.html' %}
+
+<div class="row">
+        <div class="col-md-12">
+            <div class="card " >
+            <div class="card-header card-header-primary">
+                    <h4 class="card-title">Select Student to View Attendance  {{request.user.profile.department.upper}} Department
+             </div>
+
+                <div class="card-body">
+                <form class="login-form" action="{% url 'attendance_view' request.user.pk%}" method="POST">
+                   
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">Semester</label>
+                             
+                              <select id="role" class="form-control" name="sem" required>
+                                <option value="1">I</option>
+                                <option value="2">II</option>
+                                <option value="3">III</option>
+                                <option value="4">IV</option>
+                                <option value="5">V</option>
+                                <option value="6">VI</option>
+                                <option value="7">VII</option>
+                                <option value="8">VIII</option>
+                                
+                            </select>
+                            </div>
+                          </div>
+                        
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">SEC</label>
+                            
+                              <select id="role" name="sec" class="form-control" required>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                
+                            </select>
+                            </div>
+                          </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="bmd-label-floating">Batch</label>
+                                  <input  type="text" name="batch"  class="form-control" required />
+                                </div>
+                        </div>
+                        
+                    </div>
+                    <button type="submit" class="btn btn-primary pull-right" >Attendance</button>
+                     {%	csrf_token	%}
+                  </form>
+                </div>
+              </div>
+              
+              </div>
+</div>
+         
+
+
+ {% if attend_list %}
+
+
+       
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+        <div class="card-header card-header-primary">
+            <h4 class="card-title ">
+                Batch {{batch}}_____  Branch {{request.user.profile.department.upper}} ___ Sem {{sem}} _____ Sec{{sec}}
+            </h4> 
+          </div>
+       <div class="card-body">
+         <div class="table-responsive">
+           <table class="table">
+             <thead class=" text-primary">
+                <th>Enrollment</th>
+                <th>Student name</th>
+                
+                <th>Attend Class</th>
+                <th>Total Class</th>
+             
+                <th>Attendance %</th>
+                <th>Class To Attend</th>
+                <th>Details</th>
+                <th>Notify</th>
+
+              
+             </thead>
+             <tbody>
+               
+                {% for s,att_class,total_class,attendance,cta in attend_list %}
+                <tr>
+                <td>{{s.enrollment}}</td>
+                <td>{{s.first_name}} {{s.last_name}}</td>
+
+                <td>{{ att_class }}</td>
+                <td>{{ total_class }}</td>
+                {% if attendance < 75 %}
+                    <td class="p-3 mb-2 bg-danger text-white">{{ attendance }} %</td>
+                {% else %}
+                    <td class="p-3 mb-2 bg-success text-white">{{ attendance }} %</td>
+                {% endif %}
+                
+                <td style="text-align:center;">{{ cta }}</td>
+                <td>
+                    <form method="post" action="{% url 'attendance_details' s.enrollment%}" >
+                    {% csrf_token %}
+                    <input type="hidden" value="{{s.sem}}" name="sem">
+                    <input type="hidden" value="{{s.enrollment}}" name="enrollment">
+                    <button class="btn btn-info" type="submit">Details</button>
+    
+                </form>
+            </td>
+                    {% if attendance < 60 %}
+                      <td><a class="btn btn-danger" href="{%url 'attendance_notification' s.enrollment 'suspension' attendance %}" role="button"><i class="fa fa-send-o"></i> send</a></td>
+                      {% elif attendance < 75 and object.attendance > 60 %}
+                      <td><a class="btn btn-warning" href="{%url 'attendance_notification' s.enrollment  'warning' attendance %}" role="button"><i class="fa fa-send-o"></i> send</a></td>
+                      {%else%}
+                      <td><a class="btn btn-success" href="{%url 'attendance_notification'  s.enrollment  'attendance' attendance %}" role="button"> <i class="fa fa-send-o"></i> send</a></td>
+                      {%endif%}
+         
+    
+                </tr>
+    
+            {% endfor %}
+             </tbody>
+           </table>
+         </div>
+       </div>
+     </div>
+   </div>
+  </div>
+ {%endif%}
+{%endblock %}
+
+
+
+

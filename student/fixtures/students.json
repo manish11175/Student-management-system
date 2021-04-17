@@ -1,0 +1,16 @@
+[
+{
+  "model": "student.student",
+  "pk": "0186cs171049",
+  "fields": {
+    "owner": 1,
+    "first_name": "Manish",
+    "last_name": "Chauhan",
+    "mail": "mc8553536@gmail.com",
+    "phone": "9598211175",
+    "photo": "student/images/manish1.png",
+    "dob": "2019-12-31",
+    "gender": "male"
+  }
+}
+]

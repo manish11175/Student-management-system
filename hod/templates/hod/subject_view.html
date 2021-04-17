@@ -1,0 +1,70 @@
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%} subject {% endblock	%}
+{% block panel%} Subject{%endblock%}
+{% block style %}
+
+{% endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+
+
+
+
+{% if subject%}
+
+
+    <div class="row">
+      
+{% for objects in subject %}
+        
+      <div class="col-md-12">
+      
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Subject Year :- {{objects.0.year}} , Sem :- {{objects.0.sem}} </h4>
+           
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                
+     <th>Subject Name</th>
+     <th>Subject_code</th>
+    <th>Subject Type</th> 
+  
+                </thead>
+                <tbody>
+                 
+  </tr>
+  {% for s in objects %}
+        <tr>
+      
+        <td>{{s.subject_name}}</td>
+        <td>{{s.subject_code}}</td>
+        <td>{{s.subject_type}}</td>
+        
+        </tr>
+        <tr>
+          <td>
+            <button class="btn btn-info"><a style="color: white;" href="/hod/{{objects.0.year}}/{{objects.0.sem}}/syllabus/">View Syllabus</a></button>
+          </td>
+        </tr>
+  {% endfor%}    
+  
+    <tr >
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor%} 
+
+      </div>
+      {% endif%}
+
+
+
+{% endblock%}

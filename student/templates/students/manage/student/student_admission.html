@@ -1,0 +1,165 @@
+{%	extends	"tbase.html"	%}
+{% block style%}
+
+
+{% endblock %}
+{%block panel%}Student Admission{%endblock%}
+{%	block	title	%}student admission    {%	endblock	%}
+{%	block	content	%}
+{% include 'messages.html' %}
+
+{% include 'students/manage/student/student_dash.html' %}
+
+
+
+
+    {% if admission%}
+
+
+    <div class="row">
+     
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Student Admission</h4>
+           
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>Entrance</th>
+                  <th>Admission Base</th>
+                  <th>school no</th>
+                 <th>Branch</th>
+                 <th>Sem</th> 
+                <th>Sec</th>
+                <th>Year</th>
+                </thead>
+                <tbody>
+        
+    <tr>
+      <td> {{admission.entrance}} </td>
+      <td> {{admission.admisbase}} </td>
+      <td> {{admission.sch_no}} </td>
+      <td> {{admission.branch}} </td>
+      <td> {{admission.sem}} </td>
+      <td> {{admission.sec}} </td>
+      <td> {{admission.year}} </td>   
+    </tr>
+  
+ 
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+    
+      </div>
+      {% else%}
+      
+  
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                 <h4 class="card-title">Student Admission</h4>
+                </div>
+                <div class="card-body">
+                    <form class="login-form" method="post" action="{%url "student_admission" student.enrollment	%}">
+                
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Entrance</label>
+                          <input type="text" name="entrance" class="form-control" required />
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Admission Base</label>
+                          <input type="text" name="admisbase" class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">School No</label>
+                          <input type="text" name="sch_no" required class="form-control">
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">Branch</label>
+                              <select id="role" class="form-control" name="branch" required>
+                                <option value="cs">CS</option>
+                                <option value="it">IT</option>
+                                <option value="ce">CE</option>
+                                <option value="me">ME</option>
+                                <option value="ec">EC</option>
+                                <option value="ex">EX</option>
+                                
+                            </select>
+                            </div>
+                          </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Sem</label>
+                          <select id="role" name="sem"  class="form-control" required>
+                            <option value="1">I</option>
+                            <option value="2">II</option>
+                            <option value="3">III</option>
+                            <option value="4">IV</option>
+                            <option value="5">V</option>
+                            <option value="6">VI</option>
+                            <option value="7">VII</option>
+                            <option value="8">VIII</option>
+                            
+                        </select>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Sec</label>
+                          <select id="role" name="sec"  class="form-control" required>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                      
+                        </select>
+                        </div>
+                      </div>
+                      
+                     
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">Year</label>
+                              <input  type="number" name="year" class="form-control">
+                            </div>
+                          </div>
+                        
+                       
+                       
+                      </div>
+
+
+      <button type="submit" class="btn btn-primary pull-right" >Add</button>
+      
+      {%	csrf_token	%}
+    </form>
+ 
+
+</div>
+</div>
+</div>
+{%endif%}
+
+{%endblock%}
+    
+    

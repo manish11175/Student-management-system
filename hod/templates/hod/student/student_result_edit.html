@@ -1,0 +1,51 @@
+{%	extends	"hbase.html"	%}
+{% block style%}
+{% endblock %}
+
+{%	block	title	%}student result{%	endblock	%}
+{%	block	content	%}
+{% include 'messages.html' %}
+
+{% include 'hod/student/student_dash.html' %}
+
+
+
+ <div class="row">
+    <div class="card-body">
+       
+        <div class="form" >
+          <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">Update {{sem}} Sem Marks</h4>
+          </div>
+    <form class="login-form" method="POST" action="{%url "hod_student_result_edit"	student.enrollment sem	%}" enctype="multipart/form-data">
+
+        
+        <div>
+            <label for="result">Result Status</label>
+            <select id="role" name="result" class="form-control" required>
+                <option value="pass">Pass</option>
+                <option value="fail">Fail</option>
+                
+            </select>
+
+        </div>
+        <input type="text" name="sgpa" placeholder="SGPA"required/>
+        <input type="text" name="cgpa"placeholder="CGPA" required/>
+        <label for="fail">If Fail</label>
+        <input type="text" name="if_fail" placeholder="Subject Code with Space" required/>
+        <label>Marksheet</label>
+        <input type="file" name="marksheet" required/>
+        <button type="submit" class="btn btn-primary pull-right">Update</button>
+        
+        {%	csrf_token	%}
+      </form>
+   
+    </div>
+  </div>
+    </div>
+
+  
+{%endblock%}
+    
+    

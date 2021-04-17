@@ -1,0 +1,115 @@
+{%	extends	"user/ubase.html"	%}
+{% block style%}
+img {
+    border-radius: 50%;
+  }
+{% endblock %}
+
+{%	block	title	%}student dashboard{%	endblock	%}
+{% include 'messages.html' %}
+{%	block	content	%}
+		
+          
+       <div class="container">
+        <div class="media-container-row">
+            <div class="media-content px-3 align-self-center mbr-white py-2">
+                
+      
+      <p style="color:#00414bd4;" class="mbr-author-name pt-4 mb-2 mbr-fonts-style display-1">
+                  {{request.user.first_name.upper}} {{request.user.last_name.upper}}
+                </p>
+                <p style="color:#00414bd4;" class="mbr-author-desc mbr-fonts-style display-7">
+                   {{request.user.studentprofile.role.upper}} IN {{request.user.studentprofile.department.upper}}  Department
+                </p>
+            </div>
+
+            
+              <img src="/media/{{request.user.studentprofile.photo}}/"  height="250px" width="250px">
+            
+        </div>
+    </div>
+  <!-- operation page of student-->
+ 
+<div class="container">
+    
+  <div  align="center">
+    <div class="rectangles mx-4 my-4">
+        <div class="rectangle">
+            <div class="circle"><h1>Family Details</h1><a href="{%url	"family_update"		%}"><span class="clickable"></span></a></div>
+        </div>
+        <div class="rectangle ">
+            <div class="circle"><h1>Local Gaurdian</h1><a href="{%url	"lg_update"		%}"><span class="clickable"></span></a></div>
+            
+        </div>
+    
+        <div class="rectangle">
+            <div class="circle"><h1>Admission Info</h1><a href="{%url	"admission_update"		%}"><span class="clickable"></span></a></div>
+           
+        </div>
+    
+        <div class="rectangle">
+            <div class="circle"><h1>Hostel</h1><a href="{%url	"hostel_update"		%}"><span class="clickable"></span></a></div>
+            
+        </div>
+        <div class="rectangle">
+            <div class="circle"><h1>Medical</h1><a href="{%url	"medical_update"		%}"><span class="clickable"></span></a></div>
+            
+        </div>
+        
+    </div>
+    <div class="rectangles mx-4 my-4">
+      <div class="rectangle">
+        <div class="circle"><h1>Bank</h1><a href="{%url	"bank_update"		%}"><span class="clickable"></span></a></div>
+        
+    </div>
+        <div class="rectangle">
+            <div class="circle"><h1>Placement</h1><a href="{%url	"placement_update" %}""><span class="clickable"></span></a></div>
+            
+        </div>
+    
+        <div class="rectangle ">
+            <div class="circle"><h1>Semester Result</h1><a href="{%url	"result_update" %}"><span class="clickable"></span></a></div>
+            
+        </div>
+    
+        <div class="rectangle">
+            <div class="circle"><h1>Mid Term Result</h1><a href="{%url	"midterm_update" %}"><span class="clickable"></span></a></div>
+           
+        </div>
+    
+        <div class="rectangle">
+            <div class="circle"><h1>Fee Record</h1><a href="{%url	"fee_update"		%}"><span class="clickable"></span></a></div>
+            
+        </div>
+        
+    </div>
+    <div class="rectangles mx-4 my-4">
+        <div class="rectangle">
+            <div class="circle"><h1>10th</h1><a href="{%url	"tenth_update"		%}"><span class="clickable"></span></a></div>
+            
+        </div>
+        <div class="rectangle">
+            <div class="circle"><h1>12th</h1><a href="{%url	"twelve_update"		%}"><span class="clickable"></span></a></div>
+            
+        </div>
+        <div class="rectangle ">
+            <div class="circle"><h1>Tg call</h1><a href="{%url	"student_tgcall" request.user.username %}"><span class="clickable"></span></a></div>
+            
+        </div>
+     
+      <div class="rectangle">
+        <div class="circle"><h1>Address</h1><a href="{%url	"address_update"		%}"><span class="clickable"></span></a></div>
+        
+    </div>
+    <div class="rectangle">
+        <div class="circle"><h1>Resident</h1><a href="{%url	"resident_update"		%}"><span class="clickable"></span></a></div>
+        
+    </div>
+    
+  
+      
+  </div>
+  </div>
+  </div>
+  
+{%	endblock	%}

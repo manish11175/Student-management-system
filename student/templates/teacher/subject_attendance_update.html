@@ -1,0 +1,53 @@
+
+{%	extends	"tbase.html"	%}
+{%	block	title	%}attendance update {% endblock	%}
+{% block style %}
+{% endblock%}
+{%block panel%}Student Attendance{%endblock%}
+{%	block	content	%}		
+{% include 'messages.html' %}
+
+         <div class="row">
+ 
+            <div class="col-md-12">
+                <div class="card">
+                      <div class="card-header card-header-primary">
+                        <h4 class="card-title ">
+                            Update Student {{student.enrollment}} Attendance 
+                        </h4> 
+                        <p>Date - {{date}} </p>
+                      </div>
+                  
+                      <form class="form-inline" action="{% url 'subject_attendance_update' student.enrollment subject.subject_code date %}" method="POST">
+                        <div class="card-body">
+                            <div class="btn-group btn-group-toggle my-4" data-toggle="buttons">
+
+                                <label class="btn btn-outline-success active">
+                                    <input type="radio" name="{{ student.enrollment }}" id="option1" autocomplete="off" value="1" checked> Present
+                                </label>
+                
+                                <label class="btn btn-outline-info">
+                                    <input type="radio" name="{{ student.enrollment }}" id="option2" autocomplete="off" value="0.5"> Half-Mark
+                                </label> 
+                
+                                <label class="btn btn-outline-danger">
+                                    <input type="radio" name="{{ student.enrollment }}" id="option3" autocomplete="off" value="0"> Absent
+                                </label>
+                        </div>
+                         
+                        <button class="btn btn-primary pull-right" type="submit">Submit</button>
+                          </div>
+                          {% csrf_token %} 
+                          </form>
+                          
+                        </div>
+                      </div>
+                    </div>
+        
+
+
+{%endblock %}
+
+
+
+

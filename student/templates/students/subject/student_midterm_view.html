@@ -1,0 +1,73 @@
+{%	extends	"tbase.html"	%} {% block title %} subject midterm{% endblock %} 
+    {% block panel%}
+   Mid Term
+    {% endblock%}
+    {% block content %}
+    
+    {% include 'messages.html' %}
+    {% include 'students/manage/student/student_dash.html' %}
+
+        {% if mark%}                   	
+
+
+
+       
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title ">
+                Class {{student.branch.upper}} {{student.sem}} {{student.sec}}&nbsp;&nbsp;&nbsp;
+                   Subject - {{subject.subject_name}} {{subject.subject_code}} ({{subject.subject_type}})
+             
+                </h4> 
+              </div>
+             <div class="card">
+               <div class="card-header card-header-primary">
+                 <h4 class="card-title ">Midterm Mark</h4> 
+                
+                
+               </div>
+               <div class="card-body">
+                 <div class="table-responsive">
+                   <table class="table">
+                     <thead class=" text-primary">
+                        <th>Exam Name</th>
+                        <th>Exam no</th>
+                        <th>Total Mark </th> 
+                        <th>Obtain Mark</th>
+     
+                      
+                     </thead>
+                     <tbody>
+                       
+                        {% for m in mark %}
+                        <tr>
+                         
+                            <td>Mid term</td>
+                            <td>{{m.exam_no}}</td>
+                            <td>{{m.total_mark}}</td>
+        
+                            <td>{{m.obtain_mark}}</td>
+                          
+                      
+        
+                        </tr>
+        
+                        {%endfor%}
+        
+                     </tbody>
+                   </table>
+                 </div>
+               </div>
+             </div>
+           </div>
+          </div>
+         
+        
+        
+        
+        
+        {% endif %}
+      
+        {%endblock %}

@@ -1,0 +1,115 @@
+
+{%	extends	"tbase.html"	%}
+{% block style%}
+img {
+    border-radius: 50%;
+  }
+{% endblock %}
+
+{%	block	title	%}student{%	endblock	%}
+{% block panel %}Student ReQuest{% endblock%}
+{%	block	content	%}
+        
+<div align="center" class="my-4">
+    {% if messages %}
+    <ul	class="messages">
+    {%	for	message	in	messages	%}						
+    <li	class="{{	message.tags	}}">								
+     <p style="color:darkmagenta;"> {{	message|safe	}}	</p>									
+      <a	href="#"	class="close">x</a></li>				
+      {%	endfor	%}		
+    </ul> 
+    {%	endif %}
+    </div>
+            
+    
+    {% if student%}
+
+
+    
+
+<form action="{% url 'student_account_activate'%}" method="post">
+      {% csrf_token %}
+    <div class="row">
+     
+      <div class="col-md-12">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title ">
+            Student Account activation request in {{ request.user.profile.department.upper }} 
+          </h4> 
+        </div>
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Activate Account</h4>
+           
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>Image</th>
+                  <th>Username</th>
+                  <th>Name</th>
+                 <th >Email</th>
+                  <th>Activate Account</th>
+                </thead>
+                <tbody>
+               
+              {% for s in student %}
+              <tr>
+               
+              <td><img src="/media/{{s.photo}}/"class="rounded mx-auto d-block" width="100px" height="100px"></td>
+              <td>{{s.user.username}}</td>
+              <td>{{s.user.first_name.upper}} {{s.user.last_name.upper}}</td>
+              
+             <td>{{s.user.email}}</td>
+             <td>
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-outline-danger">
+                      <input type="radio" name="{{ s.user.username}}" id="option1" autocomplete="off" value="False"checked> Deactivate
+                  </label>
+            <label class="btn btn-outline-success active">
+                          <input type="radio" name="{{ s.user.username }}" id="option2" autocomplete="off" value="True" >Activate
+                      </label>
+
+                  </div>
+                         
+          </td>
+            
+              </tr>
+             
+          {% endfor %}
+          
+            
+          
+                </tbody>
+               
+              </table>
+            </div>
+            <button class="btn btn-primary pull-right" type="submit">Submit</button>
+          </div>
+      
+        </div>
+      </div>
+     
+    
+      </div>
+
+      </form>
+    {% else%}
+    <div class="row">
+     
+      <div class="col-md-12">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title ">
+            Student Account activation request in {{ request.user.profile.department.upper }}
+          </h4> 
+        </div>
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">No Student request Found !</h4>
+           
+          </div></div></div></div>
+      {% endif%}
+            
+{%	endblock	%}

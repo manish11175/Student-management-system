@@ -1,0 +1,82 @@
+
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%} Attendance {% endblock	%}
+{% block panel%}Report{%endblock%}
+{% block style %}
+
+{% endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+
+{% if object_list%}
+
+
+    <div class="row">
+      
+
+        {% for student in object_list%}  
+        
+      <div class="col-md-12">
+      
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title "> Batch - {{student.0.enrollment.batch}}  {{request.user.profile.department.upper}} {{student.0.enrollment.sem}} SEM  </h4>
+           
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  
+             <th>ENROLLMENT</th>
+             <th>NAME</th>
+             <th>SURNAME</th>
+             <th>Sem</th>
+             <th>Attendance</th>
+                </thead>
+                <tbody>
+                 
+                    {% for object in student %}
+                    <tr>
+                    
+                    <td>{{object.enrollment}}</td>
+                    <td>{{object.enrollment.first_name.upper}}</td>
+                    <td>{{object.enrollment.last_name.upper}}</td>
+              
+                    <td>{{object.sem}}</td>
+                    
+                    {% if object.attendance < 75 %}
+                      <td class="p-3 mb-2 bg-danger text-white">{{ object.attendance }} %</td>
+                  {% else %}
+                      <td class="p-3 mb-2 bg-success text-white">{{ object.attendance }} %</td>
+                  {% endif %}
+                    
+                  </tr>
+           
+                {% endfor %}  
+            
+              
+          <tr >
+            <td colspan="2">
+               <button class="btn btn-primary"><a style="color: white;" href="/hod/{{student.0.enrollment.batch}}/attendance_pdf"><i class="fa fa-eye"></i> View Report</a></button></td>
+               
+            <td colspan="3">
+                <button class="btn btn-success"><a style="color: white;" href="/hod/{{student.0.enrollment.batch}}/download_attendance_pdf"><i class="fa fa-download"></i> Download</a></button></td>
+        </tr>
+
+               </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor%} 
+
+      </div>
+      {% endif%}
+
+
+
+
+{% endblock%}

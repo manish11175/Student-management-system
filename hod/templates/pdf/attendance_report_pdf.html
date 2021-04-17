@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
+    
+    
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>attendance report</title>
+<style>
+    .container{
+        max-width:fit-content;
+    }
+    
+    .table {
+        width:auto;
+        
+        background-color:white;
+    }
+    .table td {
+       
+        padding: .60rem;
+        font-family: cursive;
+        vertical-align: middle;
+    }
+    .table th {
+        color:ivory;
+      }
+      a:hover{
+          color:white;
+          text-decoration:none;
+      }
+      a{
+          color:white;
+      }
+</style>
+
+
+
+</head>
+<body
+
+
+
+        
+    
+        <div class="table-responsive">
+           
+        <table class="table table-bordered" align="center" width="595"cellspacing="0" style="border-color: black;" border="1">
+        
+            <tr style="background-color: darkgreen;color:white;" ><td>Attendance Report</td><td colspan="2"> Batch - {{instance.0.enrollment.batch}} </td><td colspan="2"> {{instance.0.enrollment.branch.upper}}  {{instance.0.enrollment.sem}} SEM </td></tr>
+            <tr style="background-color: darkgreen;color:white;" >
+             
+                 <td>ENROLLMENT</td>
+                 <td>NAME</td>
+                 <td>SURNAME</td>
+                  <td>Sec</td>
+                  <td>Attendance</td>
+                 
+              </tr>
+            
+
+           
+          {% for object in instance %}
+              <tr>
+              
+              <td>{{object.enrollment}}</td>
+              <td>{{object.enrollment.first_name.upper}}</td>
+              <td>{{object.enrollment.last_name.upper}}</td>
+        
+              <td>{{object.enrollment.sec}}</td>
+              
+              {% if object.attendance < 75 %}
+                <td style="background-color: red;">{{ object.attendance }} %</td>
+            {% else %}
+                <td style="background-color: green;">{{ object.attendance }} %</td>
+            {% endif %}
+              
+            </tr>
+            {% endfor%}
+          
+            </table>
+        </div>
+   
+    
+        
+
+
+
+
+
+</body>
+</html>

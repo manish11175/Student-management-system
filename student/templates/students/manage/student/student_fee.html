@@ -1,0 +1,108 @@
+{%	extends	"tbase.html"	%}
+{% block style%}
+{% endblock %}
+{%block panel%}Student Fee{%endblock%}
+{%	block	title	%}student fee{%	endblock	%}
+{%	block	content	%}
+{% include 'messages.html' %}
+
+{% include 'students/manage/student/student_dash.html' %}
+
+
+
+
+  {% if object_list%}
+
+
+  <div class="row">
+   
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title ">Fee record</h4>
+         
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>Semester</th>
+                <th>Total Amount</th>
+                <th>Due Amount </th>
+                <th> Paid Amount</th>
+                <th>Receipt No</th>
+                <th>Date</th>
+                <th>Update</th>
+              </thead>
+              <tbody>
+                {% for fee in object_list %}
+                <tr>
+                  <td> {{fee.sem}} </td>
+                  <td> {{fee.total_amt}} </td>
+                  <td> {{fee.amt_due}} </td>
+                  <td> {{fee.amt_paid}} </td>
+                  <td> {{fee.receipt_no}}   </td>
+                  <td> {{fee.date}}   </td>
+                  <td><a class="btn btn-primary" href="{% url "student_fee_edit" student.enrollment fee.receipt_no %}" role="button">EDIT</a></td>
+  
+                </tr>
+                {% endfor%}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+  
+    </div>
+    {% endif%}
+
+   
+ 
+<div class="row">
+  <div class="card-body">
+     
+      <div class="form" >
+        <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title">Fee Details</h4>
+        </div>
+        <form class="login-form" method="POST" action="{%url "student_fee_update"	student.enrollment	%}" enctype="multipart/form-data">
+            <div>
+                <label for="sem">Semester</label>
+                <select id="role" name="sem" class="form-control" required>
+                    <option value="1">I</option>
+                    <option value="2">II</option>
+                    <option value="3">III</option>
+                    <option value="4">IV</option>
+                    <option value="5">V</option>
+                    <option value="6">VI</option>
+                    <option value="7">VII</option>
+                    <option value="8">VIII</option>
+                    
+                </select>
+    
+            </div>
+            <input type="text" name="total_amt" placeholder="Total Amount"required/>
+            <input type="text" name="amt_due"placeholder="Due Amount" required/>
+            <input type="text" name="amt_paid" placeholder="Paid Amount"required/>
+            <input type="text" name="receipt_no"placeholder="Receipt No" required/>
+            <label>Date of Fee Submission</label>
+            <input type="date" name="date"/>
+            <label>Upload Receipt</label>
+            <input type="file" name="receipt"/>
+           
+            <button type="submit" class="btn btn-primary" >Update Fee</button>
+            
+            {%	csrf_token	%}
+          </form>
+       
+    </div>
+        </div>
+
+  </div>
+
+{%endblock%}
+    
+    

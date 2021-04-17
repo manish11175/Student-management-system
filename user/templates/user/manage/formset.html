@@ -1,0 +1,42 @@
+{%	extends	"user/ubase.html"	%}
+{%load widget_tweaks%}
+{%block style%}
+
+
+    
+{%endblock%}
+{%	block	title	%}		Edit	"{{	student.enrollment	}}" {%	endblock	%}
+
+{%	block content	%}	
+
+  
+<div class="row">
+
+<div class="card-body">
+   
+  <div class="form" >
+    <div class="card-header card-header-primary">
+      <h4 class="card-title">	 {{	student.enrollment	}}</h4>
+    </div> 
+
+      <form class="login-form" method="post" action=".">
+        {%	csrf_token	%}
+        {{formset.management_form}}						
+      
+        {% for form in formset%}
+        {% for field in form.visible_fields%}
+        
+            <label for="{{field.id_for_label}}" class="label"> {{field.label}} --</label>
+             
+            
+            {{field}}<br> {% if form.errors %}{{ field.errors }}{%endif%}
+          
+        {% endfor%}	
+        {% endfor%}
+        <button  class="btn btn-primary" type="submit">save</button>
+       
+      </form>
+    </div>
+    </div>
+  </div>
+{%endblock%}

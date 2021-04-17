@@ -1,0 +1,132 @@
+{%	extends	"tbase.html"	%}
+ {% block title %} unit mark {% endblock %} 
+    {% block panel%}
+    Tutorial & Test 
+    {% endblock%}
+    {% block content %}
+    {% include 'messages.html' %}
+    {% include 'students/manage/student/student_dash.html' %}
+            {% if mark%}                   	
+
+           
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title ">Class {{student.branch.upper}} {{student.sem}} {{student.sec}}&nbsp;&nbsp;&nbsp;
+                       Subject - {{subject_id.subject_name}} {{subject_id.subject_code}} ({{subject_id.subject_type}})</h4> 
+                    
+                  </div>
+    
+                 <div class="card">
+                   <div class="card-header card-header-primary">
+                     <h4 class="card-title ">Tutorial Mark
+                   </div>
+                   <div class="card-body">
+                     <div class="table-responsive">
+                       <table class="table">
+                         <thead class=" text-primary">
+                            <th>Unit no</th>
+                       <th>Tutorial No</th>
+                       <th> Total Mark</th>
+                       <th> Obtain Mark</th>
+                      
+                        
+         
+                          
+                         </thead>
+                         <tbody>
+                           
+                            {% for m in mark%}
+                    <tr>
+                        
+                      <td>{{m.unit_no}}</td> 
+                    <td>{{m.exam_no}}</td>
+                    <td>{{m.total_mark}}</td>
+                    <td>{{m.obtain_mark}}</td>
+                 
+                       
+                 
+                    </tr>
+    
+             
+    
+                  {% endfor%}
+            
+                    
+            
+                         </tbody>
+                       </table>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+              </div>
+             
+            
+            
+            
+            
+            {% endif %}
+
+
+
+
+            {% if mark1%}                   	
+
+
+
+
+            <div class="row">
+              <div class="col-md-12">
+                 <div class="card">
+                   <div class="card-header card-header-primary">
+                     <h4 class="card-title ">Test Mark</h4> 
+                     
+                    
+                   </div>
+                   <div class="card-body">
+                     <div class="table-responsive">
+                       <table class="table">
+                         <thead class=" text-primary">
+                            <th>Unit no</th>
+                           <th>Test No</th>
+                           <th> Total Mark</th>
+                           <th> Obtain Mark</th>
+                        
+         
+                          
+                         </thead>
+                         <tbody>
+                           
+                            {% for m in mark1%}
+                        <tr>
+                            
+                          <td>{{m.unit_no}}</td> 
+                        <td>{{m.exam_no}}</td>
+                        <td>{{m.total_mark}}</td>
+                        <td>{{m.obtain_mark}}</td>
+                       
+                        </tr>
+        
+            
+                            {%endfor%}
+            
+                         </tbody>
+                       </table>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+              </div>
+             
+            
+            
+            
+            
+            {% endif %}
+          
+    
+    
+        {%endblock %}

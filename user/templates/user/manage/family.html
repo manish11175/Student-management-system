@@ -1,0 +1,205 @@
+{%	extends	"user/ubase.html"	%}
+{% block style%}
+{% endblock %}
+
+{%	block	title	%}student family {%	endblock	%}
+{% block panel%} Family {%endblock%}
+
+{%	block	content	%}
+{% include 'messages.html' %}
+    
+{% if family%}
+
+
+<div class="row">
+ <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title ">FAMILY DETAILS</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>Member</th>
+              <th>Name</th>
+              <th>Number</th>
+              <th> E-mail</th>
+              <th>Organization</th>
+              <th>Occupation</th>
+              <th>Income</th>
+              <th>Office</th>
+            </thead>
+            <tbody>
+              
+             
+              <tr>
+                <td>Father</td>
+                <td> {{family.father_name}} </td>
+      <td> {{family.father_mob}} </td>
+      <td> {{family.father_email}} </td>
+      <td> {{family.father_organi}} </td>
+      <td> {{family.father_occup}} </td>
+      <td> {{family.father_income}} </td>
+      <td> {{family.father_office}} </td>
+              </tr>
+              <tr>
+                <td>Mother</td>
+                <td>{{family.mother_name}}</td>
+                <td>{{family.mother_mob}}</td>
+                <td>{{family.mother_email}}</td>
+                <td>{{family.mother_organi}}</td>
+                <td>{{family.mother_occup}}</td>
+                <td>{{family.mother_income}}</td>
+                <td>{{family.mother_office}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+  
+      
+    
+
+ {%else%}
+
+ <div class="row">
+     <div class="col-md-12">
+       <div class="card">
+         <div class="card-header card-header-primary">
+           <h4 class="card-title">Family</h4>
+           
+         </div>
+         <div class="card-body">
+           <form class="login-form" method="post" action="{%url "family_update"	%}">
+             <div class="row">
+               <div class="col-md-4">
+                 <div class="form-group">
+                   <label class="bmd-label-floating">Father Name</label>
+                   <input type="text" name="father_name" class="form-control" required>
+                 
+                   
+                 </div>
+               </div>
+               <div class="col-md-4">
+                 <div class="form-group">
+                   <label class="bmd-label-floating">Contact no</label>
+                   <input type="text" name="father_mob" class="form-control" required>
+                 </div>
+               </div>
+               <div class="col-md-4">
+                 <div class="form-group">
+                   <label class="bmd-label-floating"> E-mail</label>
+                   <input type="email"  name="father_email" class="form-control" required>
+                 </div>
+               </div>
+               
+             </div>
+             <div class="row">
+                 <div class="col-md-6">
+                     <div class="form-group">
+                       <label class="bmd-label-floating">Organization</label>
+                       <input type="text"  name="father_organi" class="form-control" required>
+                     </div>
+                   </div>
+               <div class="col-md-6">
+                 <div class="form-group">
+                   <label class="bmd-label-floating">Occupation</label>
+                   <input type="text" name="father_occup" class="form-control" required>
+                 </div>
+               </div>
+               
+              
+              
+             </div>
+             <div class="row">
+                 <div class="col-md-6">
+                     <div class="form-group">
+                       <label class="bmd-label-floating">Income</label>
+                       <input type="number" name="father_income" class="form-control" required>
+                     </div>
+                   </div>
+                 <div class="col-md-6">
+                     <div class="form-group">
+                       <label class="bmd-label-floating">Office</label>
+                       <input type="text"  name="father_office" class="form-control" required>
+                     </div>
+                   </div>
+              </div>
+
+              <div class="row">
+                 <div class="col-md-4">
+                   <div class="form-group">
+                     <label class="bmd-label-floating">Mother Name</label>
+                     <input type="text" name="mother_name" class="form-control" required>
+                   
+                     
+                   </div>
+                 </div>
+                 <div class="col-md-4">
+                   <div class="form-group">
+                     <label class="bmd-label-floating">Contact no</label>
+                     <input type="text" name="mother_mob" class="form-control" required>
+                   </div>
+                 </div>
+                 <div class="col-md-4">
+                   <div class="form-group">
+                     <label class="bmd-label-floating"> E-mail</label>
+                     <input type="email"  name="mother_email" class="form-control" required>
+                   </div>
+                 </div>
+                 
+               </div>
+               <div class="row">
+                   <div class="col-md-6">
+                       <div class="form-group">
+                         <label class="bmd-label-floating">Organization</label>
+                         <input type="text"  name="mother_organi" class="form-control" required>
+                       </div>
+                     </div>
+                 <div class="col-md-6">
+                   <div class="form-group">
+                     <label class="bmd-label-floating">Occupation</label>
+                     <input type="text" name="mother_occup" class="form-control" required>
+                   </div>
+                 </div>
+                 
+                
+                
+               </div>
+               <div class="row">
+                   <div class="col-md-6">
+                       <div class="form-group">
+                         <label class="bmd-label-floating">Income</label>
+                         <input type="number" name="mother_income" class="form-control" required>
+                       </div>
+                     </div>
+                   <div class="col-md-6">
+                       <div class="form-group">
+                         <label class="bmd-label-floating">Office</label>
+                         <input type="text"  name="mother_office" class="form-control" required>
+                       </div>
+                     </div>
+                </div>
+
+
+<button type="submit" class="btn btn-primary pull-right" >Save</button>
+
+{%	csrf_token	%}
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+  {% endif%}
+
+     
+{%endblock%}
+    
+    

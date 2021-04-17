@@ -1,0 +1,80 @@
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%}syllabus{% endblock	%}
+{% block style %}
+
+{% endblock%}
+ {% block panel%} Syllabus{%endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+
+{% if syllabus%}
+
+
+    <div class="row">
+      
+
+      <div class="col-md-12">
+      
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Syllabus in {{request.user.profile.department.upper}} &nbsp;&nbsp;&nbsp;&nbsp;Year :- {{year}}</h4>
+           
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                    <th>Sem</th>
+      <th>Syllabus</th>
+     <th>Update</th> 
+     <th>Delete</th>
+     
+                </thead>
+                <tbody>
+                 
+                    {% for s in syllabus %}
+                    <tr>
+                  
+                    <td>{{s.sem}}</td>
+                    <td><button class="btn btn-info"><a style="color:white;" href="/media/{{s.file}}"> view Syllabus</a></button></td>
+                    <td><button class="btn btn-warning"><a style="color:white;"  href="{% url "syllabus_update" s.sem %}">Update</a></button></td>
+                    <td><button class="btn btn-danger"><a style="color:white;"href="{% url "syllabus_delete" s.sem %}">Delete</a></button></td>
+                    
+                    
+                    </tr>
+              
+              {% endfor%}     
+            
+              <tr >
+                <td >  <button class="btn btn-primary" ><a style="color:white;" href="{% url "syllabus" %}">Add Syllabus</a></button></td>
+                
+                </tr>
+
+               </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      </div>
+      {%else%}
+      <div class="row">
+     
+        <div class="col-md-12">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">
+                Syllabus in {{request.user.profile.department.upper}} &nbsp;&nbsp;&nbsp;&nbsp;Year :- {{year}}
+            </h4> 
+          </div>
+          <div class="card">
+            <div class="card-header card-header-primary">
+              <h4 class="card-title ">No Syllabus Found !</h4>
+             
+            </div></div></div></div>
+      {% endif%}
+
+
+{% endblock%}

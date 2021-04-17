@@ -1,0 +1,57 @@
+
+
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%} syllabus {% endblock	%}
+{% block style %}
+
+{% endblock%}
+{% block panel%} Syllabus{%endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+<div class="row">
+  <div class="col-md-8">
+    <div class="card card-profile">
+        <div class="card-header card-header-primary">
+            <h4 class="card-title">Update Teacher of {{class_id.branch}} {{class_id.sem}} {{class_id.sec}} </h4>
+         <p class="card-category">Subject Name {{subject_id.subject_name}} ({{subject_id.subject_code}})  </p>
+          </div>
+      <div class="card-body">
+        <form class="login-form" method="POST" action="{% url 'class_teacher_update'  subject_id.subject_code class_id.sem class_id.sec %}" enctype="multipart/form-data">
+         <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <br>
+                  <label class="bmd-label-floating">New Teacher</label>
+                  <select id="role" name="teacher" class="form-control" required >
+                    {%for t in teacher  %}  
+                   
+                    <option value="{{t.username}}" data-img_src="media/{{t.profile.photo}}/">
+                        {{t.first_name}} {{t.last_name}}
+                    
+                    </option>
+          
+                    {% endfor %}       
+                </select>
+             
+                </div>
+            </div>
+                
+         </div>
+         <br>
+            <button type="submit" class="btn btn-primary" >Update</button>
+              
+    {%	csrf_token	%}
+            </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+</div>
+
+{% endblock%}

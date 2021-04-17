@@ -1,0 +1,134 @@
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%} class {% endblock	%}
+{% block panel%} Assign {%endblock%}
+{% block style %}
+
+{% endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+<div class="col-md-12">
+    <div class="card card-profile">
+        <div class="card-header card-header-primary">
+         
+            <p class="card-category"> BATCH {{bat.batch}} {{request.user.profile.department.upper}} Department  </p>
+        </div>
+      <div class="card-body">
+       
+      <form class="login-form" method="POST" action="{% url 'assign_tg'%}" enctype="multipart/form-data">
+         <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Section</label>
+                  <select id="role" name="sec" class="form-control" required>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                 
+                </select>
+                </div>
+     </div>
+     <div class="col-md-8">
+        <div class="form-group">
+          <label class="bmd-label-floating">Teacher</label>
+    <select id="role" name="teacher" class="form-control" required >
+              {%for t in teacher%}  
+             
+              <option value="{{t.username}}" data-img_src="media/{{t.profile.photo}}/" >
+                  {{t.first_name}} {{t.last_name}}
+              </option>
+             {% endfor %}       
+          </select>
+        
+        </div>
+        </div>
+      
+         </div>
+         <button type="submit" class="btn btn-primary pull-right" >Assign</button>
+         
+            
+
+              
+    {%	csrf_token	%}
+            </form>
+      </div>
+    </div>
+  </div>
+
+{% if class_tg%}
+ {% for tg in class_tg %}
+<div class="col-md-12">
+     <div class="card">
+      <div class="card-header card-header-primary" style="background: linear-gradient(60deg, #8e24aa, #ffffff);">
+        <h4 class="card-title "> TG  of Batch {{tg.0.year}} </h4>
+       
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+                <th>Class</th>
+                <th>Teacher</th>
+                <th>Profile</th>
+                <th>Edit</th>
+             
+             
+            </thead>
+            <tbody>
+                {% for t in tg %}
+                <tr>
+                <td>{{t.branch.upper}} {{t.sem}} {{t.sec}}</td>
+                <td>{{t.teacher_id}}</td>
+                <td><img src="/media/{{t.teacher_id.profile.photo}}/" class="rounded  d-block" width="100px" height="100px"></td>
+                <td>
+                  <form method="post" action="{% url 'update_tg' %}">
+                  {% csrf_token %}
+                  <input type="hidden" value="{{t.teacher_id}}" name="teacher">
+                  <input type="hidden" value="{{t.sem}}" name="sem">
+                  <input  type="hidden" value="{{t.year}}" name="batch"  required />
+                  <input type="hidden" value="{{t.sec}}" name="sec">
+                  <button class="btn btn-primary" type="submit">edit</button>
+    
+              </form>
+          </td>
+                </tr>
+          {% endfor%}     
+           
+         
+           </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  {% endfor%}  
+{% endif%}
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+{% endblock%}
+
+
+  

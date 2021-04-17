@@ -1,0 +1,105 @@
+
+
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%} class {% endblock	%}
+{% block panel%}Class{%endblock%}
+{% block style %}
+
+{% endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+<div class="row">
+    
+  <div class="col-md-4">
+      <div class="card card-profile">
+          <div class="card-header card-header-primary">
+           
+              <p class="card-category"> Class in {{request.user.profile.department.upper}} Department</p>
+          </div>
+        <div class="card-body">
+         
+          <form class="login-form" method="POST" action="{% url 'class_view'%}" enctype="multipart/form-data">
+           <div class="row">
+              <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Year</label>
+                    <input type="number" class="form-control" name="year" required>
+                  </div>
+           </div>
+   
+  </div>
+
+           
+
+                         
+  <button type="submit" class="btn btn-primary" >Submit</button>     
+      {%	csrf_token	%}
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% if object_list%}
+
+
+    <div class="row">
+      
+      {% for objects in object_list %}
+        {%if objects%}
+      <div class="col-md-12">
+      
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Class :- {{objects.0.class_id}} </h4>
+           
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>Subject Name</th>
+                  <th>Subject_code</th>
+                  <th>Subject Type</th>
+                  <th>Teacher</th> 
+                   <th>Profile</th>
+                   <th>Update</th>
+                </thead>
+                <tbody>
+                 
+                  {% for s in objects %}
+      <tr>
+    
+      <td>{{s.subject_id.subject_name}}</td>
+      <td>{{s.subject_id.subject_code}}</td>
+      <td>{{s.subject_id.subject_type}}</td>
+      <td>{{s.teacher_id.first_name}} {{s.teacher_id.last_name}}</td>
+      <td> <img src="/media/{{s.teacher_id.profile.photo}}/" height="100px" width="100px"></td>
+     
+        <td colspan="4">
+           <button class="btn btn-primary"><a style="color: white;" href="{% url "class_teacher_update" s.subject_id.subject_code s.class_id.sem s.class_id.sec %}"> <i class="fa fa-edit"></i> Edit</a></button></td>
+          
+    </tr>
+{% endfor%}    
+
+    
+            
+             
+
+               </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%endif%}
+      {% endfor%} 
+
+      </div>
+      {% endif%}
+
+
+
+
+{% endblock%}

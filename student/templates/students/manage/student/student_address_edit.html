@@ -1,0 +1,97 @@
+{%	extends	"tbase.html"	%}
+{% block style%}
+
+{% endblock %}
+{%block panel%}Student Address{%endblock%}
+
+{%	block	title	%}address{%	endblock	%}
+{%	block	content	%}
+{% include 'messages.html' %}
+
+{% include 'students/manage/student/student_dash.html' %}
+
+
+
+
+    
+
+
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Student Address</h4>
+                  
+                </div>
+                <div class="card-body">
+                  <form class="login-form" method="post" action="{%url "student_address_edit"	student.enrollment	%}">
+                    <div class="row">
+
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">House No</label>
+                          <input type="text" name="house_no" class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Street</label>
+                          <input type="text"  name="street" class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">City</label>
+                          <input type="text"  name="city" class="form-control" required>
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating"> District</label>
+                          <input type="text"  name="district" class="form-control" required>
+                        </div>
+                      </div>
+                      
+                        <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">State</label>
+                              <input type="text"  name="state" class="form-control" required>
+                            </div>
+                          </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Country</label>
+                          <input type="text" name="country" class="form-control" required>
+                        </div>
+                      </div>
+                      
+                     
+                     
+                   
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label class="bmd-label-floating">pincode</label>
+                        <input type="text"  name="pincode" class="form-control" required>
+                      </div>
+                    </div>
+                    </div>
+  
+      <button type="submit" class="btn btn-primary pull-right" >Update</button>
+      
+      {%	csrf_token	%}
+    </form>
+ 
+
+</div>
+</div>
+</div>
+
+
+{%endblock%}
+    
+    

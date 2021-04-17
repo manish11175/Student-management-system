@@ -1,0 +1,124 @@
+
+{%	extends	"base.html"	%}
+{%	block	title	%}register{%	endblock	%}
+
+{% block script%}
+
+{%endblock%}
+{%block style%}
+
+.center{
+  margin:auto;
+margin-top:100px;
+ max-width:500px;
+}
+{%endblock%}
+
+
+
+{%	block	content	%}
+
+{% include 'messages.html' %}
+<div class="row">
+        
+<div class="col-md-12">
+  <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Teacher  Registration </h4>
+        
+        </div>
+    <div class="card-body">
+      <form class="login-form" method="POST" action="{% url 'register'%}" enctype="multipart/form-data">
+       <div class="row">
+      
+        
+       <div class="col-md-4">
+        <div class="form-group">
+          <label class="bmd-label-floating">Username</label>
+          <input  type="text" name="username" required class="form-control">
+        </div>
+ </div><div class="col-md-4">
+  <div class="form-group">
+    <label class="bmd-label-floating">First Name</label>
+    <input   type="text" name="first_name" required class="form-control">
+  </div>
+</div>   
+ <div class="col-md-4">
+  <div class="form-group">
+    <label class="bmd-label-floating">Last Name</label>
+    <input  type="text" name="last_name" required class="form-control">
+  </div>
+</div>
+       </div>  
+       
+       
+       <div class="row">
+         
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="bmd-label-floating">Email</label>
+            <input   type="email" name="email" required class="form-control">
+          </div>
+     </div>
+     <div class="col-md-4">
+      <div class="form-group">
+        <label class="bmd-label-floating">Password</label>
+        <input  type="password" name="password"   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required class="form-control">
+      </div>
+</div><div class="col-md-4">
+  <div class="form-group">
+    <label class="bmd-label-floating">Confirm Password</label>
+    <input   type="password" name="password1" required class="form-control">
+  </div>
+</div>
+     </div>
+     <div class="row">
+      <div class="col-md-4">
+          <div class="form-group">
+            <label class="bmd-label-floating">Photo</label>
+            <input  type="file" accept="image/*" name="photo" required class="form-control">
+          </div>
+   </div>
+   <div class="col-md-4">
+    <div class="form-group">
+      <label class="bmd-label-floating">Register As</label>
+      <select id="role" class="form-control" name="designation" required>
+        <option value="faculty">Teacher</option>
+        <option value="hod">Hod</option>
+    </select>
+    </div>
+</div><div class="col-md-4">
+<div class="form-group">
+<label class="bmd-label-floating">Department</label>
+<select id="role" name="department" class="form-control" required>
+  <option value="cs">CS</option>
+  <option value="it">IT</option>
+  <option value="ce">CE</option>
+  <option value="me">ME</option>
+  <option value="ec">EC</option>
+  <option value="ee">EE</option>
+</select>
+</div>
+</div>
+   </div>
+
+
+       
+          
+            <button type="submit" class="btn btn-primary pull-right" >Teacher Registraion</button>
+            
+  {%	csrf_token	%}
+          </form>
+    </div>
+  </div>
+</div>
+
+</div>
+
+        
+
+  
+
+{%	endblock	%}
+

@@ -1,0 +1,44 @@
+{%	extends	"students/manage/student/student_dash.html"	%}
+{%load widget_tweaks%}
+{%block style%}
+
+form.li{
+  color:red;
+}
+{%endblock%}
+{%	block	title	%}		"{{	student.enrollment	}}" {%	endblock	%}
+
+{%	block content	%}	
+	
+
+	
+
+<div class="row">
+  
+<div class="card-body">
+  <div class="card-header card-header-primary">
+    <h4 class="card-title">{{	student.enrollment	}} </h4>
+  </div>
+    <div class="form">
+     
+      <form class="login-form" method="post" action=".">
+        {%	csrf_token	%}
+        {{formset.management_form}}						
+      
+        {% for form in formset%}
+        {% for field in form.visible_fields%}
+        
+            <label for="{{field.id_for_label}}" class="label"> {{field.label}} --</label>
+             
+            
+            {{field}}<br> {% if form.errors %}<p style="color: red;">{{ field.errors }}</p>{%endif%}
+          
+        {% endfor%}	
+        {% endfor%}
+        <button  class="btn btn-outline-success my-2 my-sm-0" type="submit">save</button>
+       
+      </form>
+    </div>
+  </div>
+</div>
+{%endblock%}

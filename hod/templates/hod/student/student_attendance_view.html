@@ -1,0 +1,95 @@
+
+{%	extends	"hbase.html"	%}
+  {%	block	title	%}attendance{%	endblock	%}
+  {%block style%}
+        
+        {%endblock%}
+        {%	block	panel	%} Student Attendance{%	endblock	%}
+        {%	block	content	%}
+        
+        {% include 'messages.html' %}
+        
+
+        
+  {% if attend%}
+        
+        
+               
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title ">
+                  {{attend.0.enrollment.first_name.upper}} {{attend.0.enrollment.last_name.upper}} ( {{attend.0.enrollment}} ) &nbsp;&nbsp;&nbsp;&nbsp;
+                  {{attend.0.enrollment.branch.upper}}  {{attend.0.enrollment.sec}} </th><th style="color: white;">   {{attend.0.sem}} SEM
+                </h4> 
+              </div>
+
+             <div class="card">
+            
+               <div class="card-header card-header-primary">
+                Total Class - {{ total_class }} &nbsp;&nbsp;&nbsp;
+                Attend Class - {{ att_class }}  &nbsp;&nbsp;&nbsp;
+                    
+              {% if attendance < 75 %}
+                  <th class="p-3 mb-2 bg-danger text-white"> Attendance - {{ attendance }} % </th>
+              {% else %}
+                  <th class="p-3 mb-2 bg-success text-white"> Attendance - {{attendance }} %</th>
+              {% endif %}
+              
+              &nbsp;&nbsp;&nbsp;&nbsp; Class To Attend - {{ cta }}
+                   
+                
+                
+               </div>
+               <div class="card-body">
+                 <div class="table-responsive">
+                   <table class="table">
+                     <thead class=" text-primary">
+                      <th>S.NO</th>
+                      <th>Date</th>
+                      <th>Day</th>
+                      <th> Status</th>
+                    </thead>
+                     <tbody>
+                      {% for a in attend %}
+           
+                      <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{a.date}}</td>
+                      <td>{{ a.date|date:"l" }}</td>
+                      {% if a.attend > 0.5 %}
+                          <td class="p-3 mb-2 bg-success text-white">{{ a.attend }}</td>
+                      {% elif a.attend == 0.5 %}
+                        <td class="p-3 mb-2 bg-warning text-black">{{ a.attend }}</td>
+                      {% else %}
+                          <td class="p-3 mb-2  bg-danger text-white">{{ a.attend }}</td>
+                      {% endif %}
+
+                      </tr>
+          
+                  {% endfor %}
+                     </tbody>
+                     <tr>
+                      {% if attendance < 60 %}
+                      <td><a class="btn btn-danger" href="{%url 'hod_attendance_notification' attend.0.enrollment 'suspension' attendance %}" role="button"><i class="fa fa-send-o"></i> send</a></td>
+                      {% elif attendance < 75 and object.attendance > 60 %}
+                      <td><a class="btn btn-warning" href="{%url 'hod_attendance_notification'  attend.0.enrollment  'warning' attendance %}" role="button"><i class="fa fa-send-o"></i> send</a></td>
+                      {%else%}
+                      <td><a class="btn btn-success" href="{%url 'hod_attendance_notification'  attend.0.enrollment  'attendance' attendance %}" role="button"> <i class="fa fa-send-o"></i> send</a></td>
+                      {%endif%}
+                     </tr>
+                   </table>
+                 </div>
+               </div>
+             </div>
+           </div>
+          </div>
+         
+        
+        
+        
+        
+        {% endif %}
+        
+                {%endblock%}

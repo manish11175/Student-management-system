@@ -1,0 +1,115 @@
+{% extends "tbase.html" %} {% block title %} subject Attendance {% endblock %} {% block style %}
+    {% endblock%}
+    {%block panel%}Student Tutorial & Test{%endblock%}
+    {% block content %}
+    
+    {% include 'messages.html' %}
+
+            <div class="row">
+                {% if mark %}
+        
+        
+                  <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title ">
+                              Student - {{student.enrollment.upper}}  Name - {{student.first_name.upper}} {{student.last_name.upper}} </h4>
+                                
+                               
+                           
+                          </div>
+                    <div class="card">
+                            <div class="card-header card-header-primary">
+                                <h4 class="card-title ">
+                                    Tutorial Mark    &nbsp;&nbsp;
+                                    Class {{request.user.profile.department.upper}} {{sem}} {{sec}} &nbsp;&nbsp;&nbsp;
+                                Subject - {{subject_id.subject_name}} {{subject_id.subject_code}} ({{subject_id.subject_type}}) 
+                                </h4> 
+                              </div>
+                       <div class="card-body">
+                         <div class="table-responsive">
+                           <table class="table">
+                             <thead class=" text-primary">
+                        <th>Unit no</th>
+                       <th>Tutorial No</th>
+                       <th> Total Mark</th>
+                       <th> Obtain Mark</th>
+                        <th>Update</th>
+                             </thead>
+                             <tbody>
+                                {% for m in mark%}
+                                <tr>
+                                    
+                                  <td>{{m.unit_no}}</td> 
+                                <td>{{m.exam_no}}</td>
+                                <td>{{m.total_mark}}</td>
+                                <td>{{m.obtain_mark}}</td>
+                                <td><a class="btn btn-primary" role="button" href="{% url "teacher_student_unit_mark_update" student.enrollment subject_id.subject_code m.exam_type m.exam_no m.unit_no %}">update</a></td>
+                                   
+                             
+                                </tr>
+                
+                         
+                
+                              {% endfor%}
+            
+                             </tbody>
+                           </table>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+              
+                 {%endif%}
+        
+        {% if mark1%}
+        
+         
+              <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">
+                            Test Mark
+                        </h4>   
+                </div>
+              
+                   <div class="card-body">
+                     <div class="table-responsive">
+                       <table class="table">
+                         <thead class=" text-primary">
+                            <th>Unit no</th>
+                            <th>Test No</th>
+                            <th> Total Mark</th>
+                            <th> Obtain Mark</th>
+                             <th>Update</th>
+                         </thead>
+                         <tbody>
+                           
+                            {% for m in mark1%}
+                            <tr>
+                                
+                              <td>{{m.unit_no}}</td> 
+                            <td>{{m.exam_no}}</td>
+                            <td>{{m.total_mark}}</td>
+                            <td>{{m.obtain_mark}}</td>
+                            <td><a class="btn btn-primary" role="button" href="{% url "teacher_student_unit_mark_update" student.enrollment subject_id.subject_code m.exam_type m.exam_no m.unit_no  %}">update</a></td>
+                               
+                         
+                            </tr>
+            
+                     
+            
+                          {% endfor%}
+        
+                         </tbody>
+                       </table>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             
+             {%endif%}
+            </div>
+
+    
+        {%endblock %}

@@ -1,0 +1,146 @@
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%} class {% endblock	%}
+{% block panel%} Assign {%endblock%}
+{% block style %}
+
+{% endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    
+<div class="col-md-12">
+    <div class="card card-profile">
+        <div class="card-header card-header-primary">
+         
+            <p class="card-title"> Class in {{request.user.profile.department.upper}} Department</p>
+        </div>
+      <div class="card-body">
+       
+      <form class="login-form" method="POST" action="{% url 'assign_ct'%}" enctype="multipart/form-data">
+         <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Semester</label>
+                  <select id="role" name="sem" class="form-control" required>
+                    <option value="1">I</option>
+                    <option value="2">II</option>
+                    <option value="3">III</option>
+                    <option value="4">IV</option>
+                    <option value="5">V</option>
+                    <option value="6">VI</option>
+                    <option value="7">VII</option>
+                    <option value="8">VIII</option>
+                </select>
+                </div>
+         </div>
+ 
+     <div class="col-md-6">
+        <div class="form-group">
+          <label class="bmd-label-floating">Section</label>
+          <select id="role" name="sec" class="form-control" required>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            
+        </select>
+        </div>
+         </div>
+        </div><button type="submit" class="btn btn-primary" >Submit</button>
+
+    {%	csrf_token	%}
+            </form>
+      </div>
+    </div>
+  </div>
+{% if subject%}
+
+<div class="col-md-12">
+    <form class="login-form" method="POST" action="/hod/{{class.sem}}/{{class.sec}}/add_assign_ct" enctype="multipart/form-data">   
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title ">Class :- {{class}} </h4>
+       
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+                <th>Subject Name</th>
+                <th>Subject_code</th>
+                <th>Subject Type</th>
+               <th>Teacher</th> 
+             
+            </thead>
+            <tbody>
+                {% for s in subject %}
+                <tr>
+                <td>{{s.subject_name}}</td>
+                <td>{{s.subject_code}}</td>
+                <td>{{s.subject_type}}</td>
+                <td>
+          
+          
+                
+                  <label for="teacher">Teacher</label>
+                  <select id="role" name="{{s.subject_code}}" class="form-control" required >
+                      {%for t in teacher%}  
+                     
+                      <option value="{{t.username}}" data-img_src="media/{{t.profile.photo}}/" >
+                          {{t.first_name}} {{t.last_name}}
+                      
+                      </option>
+                      {% empty%}
+                      <p>Subject not found</p>
+            
+                      {% endfor %}       
+                  </select>
+                
+              
+            
+          </td>
+               
+                </tr>
+          {% endfor%}     
+        
+         
+
+           </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <button type="submit"  class="btn btn-primary pull-right" >Submit</button>  
+    {%	csrf_token	%}
+</form>
+  </div>
+
+
+{% endif%}
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+{% endblock%}
+
+
+  

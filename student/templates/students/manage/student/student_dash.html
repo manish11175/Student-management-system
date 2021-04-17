@@ -1,0 +1,90 @@
+
+
+ <div class="container">
+   <div align="center">
+  
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+      <a class="navbar-brand" href="{%url	"teacher_student_dash"	student.enrollment	%}">{{student.first_name.upper}} {{student.last_name.upper}}</a>
+       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+       </button>
+ 
+ 
+      
+       
+       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         <ul class="navbar-nav ml-auto mx-4">
+          <li class="nav-item active">
+            <a class="nav-link" href="{%url	"student_list"	student.enrollment	%}">{{student.enrollment.upper}}<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{%url	"tgcalling"	student.enrollment	%}">Tgcall<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{%url "student_edit" student.enrollment	%}">EDIT<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Result
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{%url "student_midsem_update"	student.enrollment	%}">Mid Term </a>
+              <a class="dropdown-item" href="{%url "student_result_update"	student.enrollment	%}">Semester</a>
+              <a class="dropdown-item" href="{%url "teacher_student_subject"	student.enrollment	%}">Subject</a>
+              
+  
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Academic
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{%url "teacher_student_education"	student.enrollment	%}">Education</a>
+              <a class="dropdown-item" href="{%url "student_fee_update"	student.enrollment	%}">Fee</a>
+              <a class="dropdown-item" href="{%url "student_placement_update"	student.enrollment	%}">Placement</a>
+              <a class="dropdown-item" href="{%url "student_admission"	student.enrollment	%}"> Admission Info</a>
+              <a class="dropdown-item" href="{%url "student_hostel_update"	student.enrollment	%}">Hostel</a>
+              
+  
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Attendance
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{%url "teacher_student_sem_attendance"	student.enrollment	%}">Daily Attendance</a>
+              <a class="dropdown-item" href="{%url "teacher_student_subject_attendance"	student.enrollment	%}">Subject Attendance</a>
+              
+             
+  
+            </div>
+          </li>
+       
+         
+          <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Personal Info
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{%url	"student_family_update"	student.enrollment	%}"> Family</a>
+                  <a class="dropdown-item" href="{%url	"student_lg_update"	student.enrollment	%}">Local Gaurdian</a>
+                  <a class="dropdown-item" href="{%url	"student_medical_update"	student.enrollment	%}">Medical</a>
+                  <a class="dropdown-item" href="{%url	"student_bank_update"	student.enrollment	%}">Bank</a>
+                </div>
+              </li>
+          
+           
+         </ul>
+         
+       </div>
+     
+       
+      
+     
+     </nav>
+   </div>
+ </div>     
+
+

@@ -1,0 +1,150 @@
+
+{%	extends	"tbase.html"	%}
+{%	block	title	%}My students {% endblock	%}
+{%block panel%}My Student{%endblock%}
+{% block style %}
+
+{% endblock%}
+{%	block	content	%}		
+{% include 'messages.html' %}
+
+
+
+
+ 
+<div style="overflow-x:auto;" class="row">
+    <div class="col-md-12">
+     <form class="form-inline" action="{%url "tg_student_attendance_date" %}" method="get">
+       <div class="card">
+         <div class="card-body">
+   
+         <div class="row">
+             <div class="col-md-2">
+                 <div class="form-group">
+                   <a href="{%url "tg_student_attendance_week" %}">last 1 Week</a>
+                 </div>
+               </div>
+                 <div class="col-md-2">
+                     <div class="form-group">   
+                       <a href="{%url "tg_student_attendance" %}">All</a>
+                       </div>
+                 </div>
+ 
+                 <div class="col-md-4">
+                     <div class="form-group">
+                       <label>From</label>
+                      <input type="date" name="date__gte"class="form-control" required >
+                     </div>
+                   </div>
+                   <div class="col-md-4">
+                     <div class="form-group">
+                       <label>To</label>
+                       <input type="date" name="date__lt" class="form-control" required>
+                     </div>
+ 
+                   </div>
+                 </div>
+             <button  class="btn btn-primary pull-right" type="submit"><i class="fa fa-search"></i> Search</button>
+        
+         </div>
+       </div>
+     </form>
+          </div>
+       </div>
+
+{% if object_list %}
+
+    <div class="row">
+       
+       
+      
+        
+      <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title "> From  &nbsp; {{pickup}} &nbsp;&nbsp;&nbsp;To  &nbsp;{{dropoff}}</h4>
+            </div>
+       </div>
+
+
+
+       
+        {% for student,b in object_list%}  
+      
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title "> Batch -{{b}}  </h4>
+           
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  
+                
+                    <th>ENROLLMENT</th>
+                     <th>NAME</th>
+                     <th>Attend Class</th>
+                     <th>Total Class</th>
+                     <th>Attendance %</th>
+                     <th>Class To Attend</th>
+                     <th>Details</th>
+                     <th>Notify</th>
+
+                     
+                </thead>
+                <tbody>
+                 
+                    {% for s,att_class,total_class,attendance,cta in student %}
+        
+                    <tr>
+                        
+        
+                        <td>{{s.enrollment.upper}}</td>
+                        <td>{{s.first_name.upper}} {{s.last_name.upper}}</td>
+                        <td>{{att_class}}</td>
+                        <td>{{total_class}}</td>
+                        <td>{{attendance}}</td>
+                        <td>{{cta}}</td>
+                        
+                      
+                        <td>
+                            <form method="post" action="{% url 'attendance_details' s.enrollment %}" >
+                            {% csrf_token %}
+                            <input type="hidden" value="{{s.sem}}" name="sem">
+                            <input type="hidden" value="{{s.enrollment}}" name="enrollment">
+                            <button class="btn btn-info" type="submit"><i class="fa fa-info-circle"></i> Details</button>
+            
+                        </form>
+                    </td>
+                    {% if attendance < 75 %}
+                    <td><a class="btn btn-danger" href="{%url 'attendance_notification'  s.enrollment 'suspension' attendance %}" role="button"><i class="fa fa-send-o"></i> send</a></td>
+                    {% elif attendance < 75 and attendance > 60 %}
+                        <td><a class="btn btn-warning" href="{%url 'attendance_notification'  s.enrollment 'warning' attendance %}" role="button"><i class="fa fa-send-o"></i> send</a></td>
+                        
+                    {%else%}
+                    <td><a class="btn btn-success" href="{%url 'attendance_notification'  s.enrollment 'attendance' attendance %}" role="button"><i class="fa fa-send-o"></i> send</a></td>
+                    {%endif%}
+                      </tr>
+          
+                    {% endfor %}
+            
+              
+          
+               </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        {% endfor%} 
+      </div>
+     
+
+      </div>
+      {% endif%}
+
+
+
+{%endblock %}
+
+

@@ -1,0 +1,27 @@
+
+
+{%extends "base.html"%}
+
+{%	block	title	%}log-out{%	endblock	%}
+{% block content%}
+<div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title">Logged	out</h4>
+  
+        </div>
+       
+          <div class="card">
+            <div class="card-header card-header-primary">
+  
+                <h5 class="card-title">You	have	been	successfully	logged	out.You	can	<a	href="{%	url	"student_login"	%}">log-in	again :)</h6>
+              </div>
+           
+          </div>
+        </div>
+    </div>
+
+
+    
+{% endblock%}

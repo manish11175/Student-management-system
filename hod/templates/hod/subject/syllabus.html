@@ -1,0 +1,93 @@
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%} syllabus {% endblock	%}
+{% block style %}
+
+{% endblock%}
+{%block panel%} Syllabus {%endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header card-header-primary">
+       
+        <p class="card-category">add syllabus in {{request.user.profile.department.upper}} Current Year is {{bat}}</p>
+      </div>
+      <div class="card-body">
+        <form class="login-form" method="POST" action="{% url 'syllabus'%}" enctype="multipart/form-data">
+      
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">Sem</label>
+                <select id="role" name="sem" class="form-control" required>
+                  <option value="1">I</option>
+                  <option value="2">II</option>
+      
+                  <option value="3">III</option>
+                  <option value="4">IV</option>
+                  <option value="5">V</option>
+                  <option value="6">VI</option>
+                  <option value="7">VII</option>
+                  <option value="8">VIII</option>
+              </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="bmd-label-floating">Upload Syllabus</label>
+                <input  type="file" name="file"  class="form-control" required>
+              </div>
+            </div>
+           
+            
+          </div>
+         
+            
+           
+          </div>
+          
+
+
+<button type="submit" class="btn btn-primary" >Add </button>
+
+{%	csrf_token	%}
+</form>
+
+
+</div>
+</div>
+<div class="col-md-4">
+  <div class="card card-profile">
+      <div class="card-header card-header-primary">
+       
+          <p class="card-category"> Subjects in {{request.user.profile.department.upper}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Current Year is {{bat}}</p>
+        </div>
+    <div class="card-body">
+      <form class="login-form" method="POST" action="{% url 'syllabus_view'%}" enctype="multipart/form-data">
+       <div class="row">
+          <div class="col-md-12">
+              <div class="form-group">
+                <label class="bmd-label-floating">Year</label>
+                <input  type="number" name="year" required class="form-control">
+              </div>
+       </div>
+       </div>
+
+       
+          
+            <button type="submit" class="btn btn-primary" ><i class="fa fa-eye"></i> View Syllabus</button>
+            
+  {%	csrf_token	%}
+          </form>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+{% endblock%}

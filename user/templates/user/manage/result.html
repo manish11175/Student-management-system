@@ -1,0 +1,110 @@
+
+{%	extends	"user/ubase.html"	%}
+{% block style%}
+{% endblock %}
+
+{%	block	title	%}student result{%	endblock	%}
+{% block panel%} Semester Result{%endblock%}
+{%	block	content	%}
+{% include 'messages.html' %}
+
+{% if object_list%}
+
+
+    <div class="row">
+     
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Semester Result</h4>
+           
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>Semester</th>
+                  <th>Result</th>
+                  <th>CGPA</th>
+                  <th>SGPA</th>
+                  <th>Back Paper</th>
+                </thead>
+                <tbody>
+                  {% for result in object_list %}
+                  <tr>
+                    <td> {{result.sem}} </td>
+                   <td>{{result.result}}</td>
+                    <td> {{result.cgpa}} </td>
+                   <td>{{result.sgpa}}</td> 
+                   <td> {{result.if_fail}} </td>
+                  </tr>
+                  {% endfor%}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+
+      </div>
+      {% endif%}
+
+<div class="row">
+  <div class="card-body">
+     
+      <div class="form" >
+        <div class="card-header card-header-primary">
+          <h4 class="card-title"> Semester  Result</h4>
+        </div>
+      
+        <form class="login-form" method="POST" action="{% url 'result_update'%}" enctype="multipart/form-data">
+       
+          <div><br><br>
+              <label for="cars">Semester</label>
+              <select id="role" name="sem"  class="form-control" required>
+                  <option value="1">I</option>
+                  <option value="2">II</option>
+                  <option value="3">III</option>
+                  <option value="4">IV</option>
+                  <option value="5">V</option>
+                  <option value="6">VI</option>
+                  <option value="7">VII</option>
+                  <option value="8">VIII</option>
+                  
+              </select>
+  
+          </div>
+  
+          
+          <div>
+              <label for="result">Result Status</label>
+              <select id="role" name="result"  class="form-control" required>
+                  <option value="pass">Pass</option>
+                  <option value="fail">Fail</option>
+                  
+              </select>
+  
+          </div>
+          <input type="number" name="cgpa"placeholder="CGPA" required/>
+          <input type="number" name="sgpa" placeholder="SGPA"required/>
+          
+          <label for="fail">If Fail</label>
+          <input type="text" name="if_fail" placeholder="Subject Code with Space" required/>
+          <input type="file" name="marksheet"/>
+          
+          
+          
+  
+  
+          <button type="submit" class="btn btn-primary" >Save Result</button>
+          
+          {%	csrf_token	%}
+        </form>
+     
+    
+  </div>
+</div>
+</div>
+{%endblock%}
+    

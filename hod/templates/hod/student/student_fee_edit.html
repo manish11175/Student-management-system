@@ -1,0 +1,60 @@
+{%	extends	"hbase.html"	%}
+{% block style%}
+{% endblock %}
+{%block panel%}Student Fee{%endblock%}
+{%	block	title	%}student fee{%	endblock	%}
+{%	block	content	%}
+{% include 'messages.html' %}
+
+{% include 'hod/student/student_dash.html' %}
+
+
+
+   
+ 
+<div class="row">
+  <div class="card-body">
+     
+      <div class="form" >
+        <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title">Update fee</h4>
+        </div>
+        <form class="login-form" method="POST" action="{%url "hod_student_fee_edit"	student.enrollment fee.receipt_no	%}" enctype="multipart/form-data">
+            <div>
+                <label for="sem">Semester</label>
+                <select id="role" name="sem" class="form-control" required>
+                    <option value="1">I</option>
+                    <option value="2">II</option>
+                    <option value="3">III</option>
+                    <option value="4">IV</option>
+                    <option value="5">V</option>
+                    <option value="6">VI</option>
+                    <option value="7">VII</option>
+                    <option value="8">VIII</option>
+                    
+                </select>
+    
+            </div>
+            <input type="text" name="total_amt" placeholder="Total Amount"  required/>
+            <input type="text" name="amt_due"placeholder="Due Amount" required/>
+            <input type="text" name="amt_paid" placeholder="Paid Amount"required/>
+            <input type="text" name="receipt_no"placeholder="Receipt No" required/>
+            <label>Date of Fee Submission</label>
+            <input type="date" name="date"/>
+            <label>Upload Receipt</label>
+            <input type="file" name="receipt"/>
+           
+            <button type="submit" class="btn btn-primary" >Update Fee</button>
+            
+            {%	csrf_token	%}
+          </form>
+       
+    </div>
+        </div>
+
+  </div>
+
+{%endblock%}
+    
+    

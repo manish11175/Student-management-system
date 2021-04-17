@@ -1,0 +1,100 @@
+
+{%	extends	"abase.html"	%}
+{%	block	title	%}hod {% endblock	%}
+{% block style %}
+.card-body {
+  
+  background-color:#08393a;
+}
+.container{
+    max-width:fit-content;
+}
+
+.table {
+    
+    
+    background-color: cornsilk;
+}
+.table td {
+    padding: .60rem;
+    font-family: cursive;
+    vertical-align: middle;
+}
+.table th {
+    color:ivory;
+    background-color:darkgreen;
+  }
+  .card-header {
+    background-color: darkgreen;}
+    b, strong {
+        color: antiquewhite;
+        
+    }
+    .btn-success {
+        width: inherit;
+        background-color: darkgreen;
+        border-color: brown;}
+{% endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+
+
+
+
+
+
+<div class="card mb-3 my-4" align="center">
+    <div class="card-header">
+      <i class="fas fa-table"></i>
+     <b color="white" >Hod In College </b> 
+    </div>
+    
+    <div class="card-body" >
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Date Of Birth</th>
+              
+                <th>Mobile No</th>
+                <th >Email</th>
+                <th>Address</th>
+                <th>Pincode</th>
+                <th>Join Date</th>
+            </tr>
+          </thead>
+            <tbody>
+            {% for h in hod %}
+                <tr>
+                    <td><img src="/media/{{h.profile.photo}}/"class="rounded mx-auto d-block" width="100px" height="100px"></td>
+                <td>{{h.first_name.upper}} {{h.first_name.upper}}</td>
+                <td>
+                    {{h.profile.department.upper}}
+                </td>
+                <td>{{h.profile.date_of_birth}}</td>
+                <td>{{h.profile.contact_no}}</td>
+               <td>{{h.email}}</td>
+               <td>{{h.profile.city_town_area}} {{h.profile.District}} {{h.profile.state}} {{f.profile.country}} </td>
+               <td>{{h.profile.pincode}}</td>
+               <td>{{h.profile.join_date}}</td>
+                </tr>
+                {%empty%}
+    <h1 style="color:black ;"> You	haven't any hod in college</h1>
+            {% endfor %}
+            
+            </tbody>
+            
+        </table>
+       
+      </div>
+    </div>
+    </div>
+    
+    
+    
+    
+
+{%endblock%}

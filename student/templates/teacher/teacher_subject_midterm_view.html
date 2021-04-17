@@ -1,0 +1,117 @@
+{% extends "tbase.html" %} {% block title %} subject midterm{% endblock %} 
+
+{% block style %} {% endblock%}
+{%block panel%}Student Midterm{%endblock%}
+{% block content %}
+    
+{% include 'messages.html' %}
+    <div class="row">
+        {% if midterm1 %}
+
+
+          <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title ">
+                        Class {{request.user.profile.department.upper}} {{sem}} {{sec}}
+                        Subject - {{subject.subject_name}} {{subject.subject_code}} ({{subject.subject_type}} )
+                    </h4> 
+                  </div>
+            <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">
+                            MID TERM I
+                        </h4> 
+                      </div>
+               <div class="card-body">
+                 <div class="table-responsive">
+                   <table class="table">
+                     <thead class=" text-primary">
+                        <th>Enrollment</th>
+                        <th>Student name</th>
+                        <th>Total Mark </th> 
+                        <th>Obtain Mark</th>
+                        <th>Update</th>
+                     </thead>
+                     <tbody>
+                       
+                        {% for stu,mid1 in midterm1%}
+                      
+                        <tr>
+                            <td>{{stu.enrollment.upper}}</td>
+                            <td>{{stu.first_name.upper}} {{stu.last_name.upper}}</td>
+                            <td>{{mid1.total_mark}}</td>
+        
+                            <td>{{mid1.obtain_mark}}</td>
+                          
+                      
+                            <td><a class="btn btn-primary" role="button" href="{% url 'teacher_subject_midterm_update'  stu.enrollment subject.subject_code 1 %}">edit</a></td>
+                            
+                    </tr>
+    
+                    {%endfor%}
+    
+                     </tbody>
+                   </table>
+                 </div>
+               </div>
+             </div>
+           </div>
+      
+         {%endif%}
+
+{% if midterm2 %}
+
+ 
+      <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title ">
+                    Class {{request.user.profile.department.upper}} {{sem}} {{sec}}
+                    Subject - {{subject.subject_name}} {{subject.subject_code}} ({{subject.subject_type}} )
+                </h4> 
+              </div>
+        <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title ">
+                        MID TERM II
+                    </h4> 
+                  </div>
+           <div class="card-body">
+             <div class="table-responsive">
+               <table class="table">
+                 <thead class=" text-primary">
+                    <th>Enrollment</th>
+                    <th>Student name</th>
+                    <th>Total Mark </th> 
+                    <th>Obtain Mark</th>
+                    <th>Update</th>
+                 </thead>
+                 <tbody>
+                   
+                    {% for stu,mid1 in midterm2%}
+                    <tr>
+                    <td>{{stu.enrollment.upper}}</td>
+                    <td>{{stu.first_name.upper}} {{stu.last_name.upper}}</td>
+                    <td>{{mid1.total_mark}}</td>
+
+                    <td>{{mid1.obtain_mark}}</td>
+                  
+              
+                    <td><a class="btn btn-primary" role="button" href="{% url 'teacher_subject_midterm_update'  stu.enrollment subject.subject_code 2%}">edit</a></td>
+                    
+
+                </tr>
+
+                {%endfor%}
+
+                 </tbody>
+               </table>
+             </div>
+           </div>
+         </div>
+       </div>
+     
+     {%endif%}
+    </div>
+        {%endblock %}

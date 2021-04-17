@@ -1,0 +1,109 @@
+{%	extends	"tbase.html"	%}
+{% block style%}
+
+
+{% endblock %}
+{%block panel%}Student Placement{%endblock%}
+{%	block	title	%}student placement {%	endblock	%}
+{%	block	content	%}
+{% include 'messages.html' %}
+
+{% include 'students/manage/student/student_dash.html' %}
+
+
+
+
+
+    {% if object_list%}
+
+
+    <div class="row">
+     
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Placement record</h4>
+           
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>Date Of T&P</th>
+                  <th>Placement Date</th>
+                  <th>Company Name</th>
+                 <th>Placement Result</th>
+                 <th>Join Date</th> 
+                <th>Placement Package (Lakh)</th>
+                <th>Placement  Remark</th>
+                </thead>
+                <tbody>
+                  {% for placement in object_list %}
+    <tr>
+      <td> {{placement.tnp_date}} </td>
+      <td> {{placement.placement_date}} </td>
+      <td> {{placement.company_name}} </td>
+      <td> {{placement.placement_result}} </td>
+      <td> {{placement.join_date}} </td>
+      <td> {{placement.placement_package}} </td>
+      <td> {{placement.placement_remark}} </td>
+    </tr>
+  
+    {% endfor%}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+    
+      </div>
+      {% endif%}
+  
+
+
+
+      <div class="row">
+        <div class="card-body">
+           
+            <div class="form" >
+              <div class="card">
+              <div class="card-header card-header-primary">
+                <h4 class="card-title">Placement Details</h4>
+              </div>
+    <form class="login-form" method="post" action="{%url "student_placement_update"	student.enrollment	%}">
+      {%	csrf_token	%}
+      <label for="result">T & P Date</label>
+      <input type="date" name="tnp_date" placeholder="T & P Date" />
+      <label for="result">Placement Date</label>
+      <input type="date" name="placement_date" placeholder="Placement Date" />
+      <input type="text" name="company_name" placeholder="Company Name" required/>
+    
+
+    
+    <div>
+        <label for="result">Placement Result</label>
+        <select id="role" name="placement_result" class="form-control"required>
+            <option value="selected">Selected</option>
+            <option value="rejected">Rejected</option>
+            
+        </select>
+
+    </div>
+    <label for="result">Join Date</label>
+    <input type="date" name="join_date"placeholder="Join Date" />
+    <input type="number"step="0.01" name="placement_package" placeholder="Package in Lakh"/>
+    <input type="text" name="placement_remark" placeholder="Placement Remark"/>
+    
+      
+      <button  class="btn btn-primary" type="submit">save</button>
+     
+    </form>
+  </div>
+</div>
+</div>
+
+{%endblock%}
+    
+    

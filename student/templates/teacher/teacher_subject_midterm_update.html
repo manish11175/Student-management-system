@@ -1,0 +1,50 @@
+
+{%	extends	"tbase.html"	%}
+{%	block	title	%}midterm details {% endblock	%}
+{% block style %}
+
+{% endblock%}
+{%block panel%}Student Midterm {%endblock%}
+{%	block	content	%}		
+
+{% include 'messages.html' %}
+
+     <div class="row">
+ 
+        <div class="col-md-6">
+            <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title ">
+                        Update {{student.enrollment}} Mid Term {{exam_no}} Mark
+                    </h4> 
+                    <p>Subject - {{subject.subject_name}} ({{subject.subject_code}})</p>
+                  </div>
+              
+                  <form class="form-inline" action="{% url 'teacher_subject_midterm_update' student.enrollment subject.subject_code exam_no %}" method="POST">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                  <label class="bmd-label-floating">Obtain Mark</label>
+                                  <input type="number" name="obtain_mark" class="form-control" required>
+                                </div>
+                              </div>
+                            </div>
+                        <button class="btn btn-primary pull-right" type="submit">Submit</button>
+                      </div>
+                      {% csrf_token %} 
+                      </form>
+                      
+                    </div>
+                  </div>
+                </div>
+               
+              
+
+
+
+{%endblock %}
+
+
+
+

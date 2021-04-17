@@ -1,0 +1,93 @@
+
+{%	extends	"tbase.html"	%}
+{%	block	title	%}My students {% endblock	%}
+{% block style %}
+
+{% endblock%}
+{%block panel%}All Student  {%endblock%}
+{%	block	content	%}		
+
+
+
+
+    <div style="overflow-x:auto;" class="card-body">
+       
+    <div class="form">
+     
+         <form class="form-inline" action="" method="GET">
+            
+             {{ form }}
+             <button  class="btn btn-primary" type="submit"><i class="fa fa-search"></i> Search</button>
+            
+         </form>
+         </div>
+      </div>
+
+
+
+
+ 
+     {% if object_list %}
+
+     <div class="row">
+       
+   
+         
+       <div class="col-md-12">
+       
+         <div class="card">
+           <div class="card-header card-header-primary">
+             <h4 class="card-title "> All Student in {{request.user.profile.department.upper}} Deprtment </h4>
+            
+           </div>
+           <div class="card-body">
+             <div class="table-responsive">
+               <table class="table">
+                 <thead class=" text-primary">
+                   
+                    <th>IMAGE</th>
+                    <th>ENROLLMENT</th>
+                     <th>NAME</th>
+                    
+                     <th>CONTACT</th>
+                     <th>E-MAIL</th>
+                  
+                     <th>Attendance</th>
+                     <th>VIEWS</th>
+          
+                     <th>DELETE</th>
+                 </thead>
+                 <tbody>
+          {% for object in object_list %}
+        
+                     <tr>
+                         <td><img src="/media/{{object.photo}}/" width="80px" height="80px"></td>
+                         <td>{{object.enrollment.upper}}</td>
+                         <td>{{object.first_name.upper}} {{object.last_name.upper}}</td>
+                         <td>{{object.phone}}</td>
+                         <td>{{object.Email}}</td>
+                          <td><a class="btn btn-info" role="button" href="{%url	"student_attendance_view"	object.enrollment	%}"  ><i class="fa fa-line-chart"></i> Attendance</a></td>
+                         <td><a class="btn btn-primary" role="button" href="{%url	"student_list"	object.enrollment	%}"   > <i class="fa fa-eye"></i> VIEWS</a></td>
+                         <td> <a class="btn btn-danger" href="{%	url	"student_delete" object.enrollment	%}" role="button"><i class="fa fa-trash-o"></i> Delete</a></td>
+                        
+                       </tr>
+              
+                     {% endfor %}
+           
+                </tbody>
+               </table>
+             </div>
+           </div>
+         </div>
+       </div>
+    
+ 
+       </div>
+       {% endif%}
+ 
+ 
+ 
+
+{%endblock %}
+
+

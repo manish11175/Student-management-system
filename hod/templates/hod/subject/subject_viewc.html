@@ -1,0 +1,71 @@
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%} subject {% endblock	%}
+{% block panel%}Subject{%endblock%}
+{% block style %}
+
+{% endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+{% if subject%}
+
+
+    <div class="row">
+      
+{% for objects in subject %}
+        
+      <div class="col-md-12">
+      
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Subject  {{objects.0.year}} ,{{objects.0.dept.upper}} ,Sem-{{objects.0.sem}} </h4>
+           
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>Subject Name</th>
+                  <th>Subject_code</th>
+                 <th>Subject Type</th> 
+                 <th>Update</th>
+                 <th>Delete</th>
+                </thead>
+                <tbody>
+                 
+                  {% for s in objects %}
+                  <tr>
+                
+                  <td>{{s.subject_name}}</td>
+                  <td>{{s.subject_code}}</td>
+                  <td>{{s.subject_type}}</td>
+                  <td><button class="btn btn-info"><a style="color:white;" href="/hod/{{objects.0.sem}}/{{s.subject_code}}/subject/"><i class="fa fa-edit"></i> Update</a></button></td>
+                  <td><button class="btn btn-danger"><a style="color:white;" href="/hod/{{objects.0.sem}}/{{s.subject_code}}/subject_delete/"><i class="fa fa-trash-o"></i> Delete</a></button></td>
+                  
+                  </tr>
+            {% endfor%}    
+            
+              <tr >
+                <td ><button class="btn btn-success" ><a  style="color: white;"href="{% url "add_subject" %}"><i class="fa fa-plus"></i> Add Subject</a></button></td>
+                <td >
+                   <button class="btn btn-primary"><a style="color: white;" href="/hod/{{objects.0.year}}/{{objects.0.sem}}/syllabus/"><i class="fa fa-eye"></i> View Syllabus</a></button></td>
+                  
+                </tr>
+
+               </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor%} 
+
+      </div>
+      {% endif%}
+
+
+
+
+{% endblock%}
+
+

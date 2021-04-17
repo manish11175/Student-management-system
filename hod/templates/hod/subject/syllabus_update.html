@@ -1,0 +1,43 @@
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%} syllabus {% endblock	%}
+{% block style %}
+
+{% endblock%}
+{% block panel%} Syllabus{%endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card card-profile">
+        <div class="card-header card-header-primary">
+         <p class="card-category"> syllabus of {{request.user.profile.department.upper}} {{sem}}  Sem   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Year - {{year}}</p>
+          </div>
+      <div class="card-body">
+        <form class="login-form" method="POST" action="{% url 'syllabus_update' sem %}" enctype="multipart/form-data">
+         <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                  <label class="bmd-label-floating"> Syllabus</label>
+                  <input type="file" name="file" required class="form-control">
+                </div>
+            </div>
+                
+         </div>
+            <button type="submit" class="btn btn-primary" >Update</button>
+              
+    {%	csrf_token	%}
+            </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+</div>
+
+{% endblock%}

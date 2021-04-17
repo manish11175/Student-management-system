@@ -1,0 +1,26 @@
+{%extends "base.html"%}
+
+{%	block	title	%}register{%	endblock	%}
+{% block content%}
+{% include 'messages.html' %}
+<div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title">Welcome	{{	new_user.first_name	}}!</h4>
+  
+        </div>
+       
+          <div class="card">
+            <div class="card-header card-header-primary">
+  
+                <h5 class="card-title">Your	account	is under review. We will come back to you after Activated your account :)</h6>
+              </div>
+           
+          </div>
+        </div>
+    </div>
+
+    
+
+{% endblock%}

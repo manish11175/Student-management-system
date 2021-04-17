@@ -1,0 +1,45 @@
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%}Edit	your	account{%	endblock	%}
+{%block style%}
+
+
+  {%endblock%}
+  {%block panel%} Profile Edit{%endblock%}
+{%	block	content	%}
+{% include 'messages.html' %}
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Edit Profile</h4>
+        <p class="card-category">Complete your profile</p>
+      </div>
+
+     
+       
+      <form  method="post" action="/account/hodedit/" enctype="multipart/form-data">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                {{	user_form.as_p	}}				
+                {{	profile_form.as_p	}}				
+                {%	csrf_token	%}	
+              </div>
+            </div>
+        
+     <button class="btn btn-primary pull-right" type="submit" >Update</button>
+            
+           
+            
+    </div>
+          </form>
+       
+      </div>
+  </div>
+{%	endblock	%}
+    
+
+    

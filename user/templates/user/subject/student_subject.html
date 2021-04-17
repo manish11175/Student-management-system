@@ -1,0 +1,109 @@
+{%	extends	"user/ubase.html"	%}
+{%	block	title	%}subject{%	endblock	%}
+{%block style%}
+
+{%endblock%}
+{%	block	panel	%} Subject {%	endblock	%}
+{%	block	content	%}
+
+{% include 'messages.html' %}
+
+
+  <div class="row">
+    <div class="card-body">
+   
+    <div class="form" >
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Subject</h4>
+      </div>
+      <form class="login-form" method="POST" action="{% url 'student_subject'%}" enctype="multipart/form-data">
+       
+        <div>
+          <br><br>
+            <label class="bmd-label-floating" for="cars">Semester</label>
+            <select id="role" name="sem" class="form-control"required>
+                <option value="1">I</option>
+                <option value="2">II</option>
+                <option value="3">III</option>
+                <option value="4">IV</option>
+                <option value="5">V</option>
+                <option value="6">VI</option>
+                <option value="7">VII</option>
+                <option value="8">VIII</option>
+                
+            </select>
+
+        </div>
+
+    
+       <button type="submit" class="btn btn-primary" >Subject</button>
+        
+        {%	csrf_token	%}
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+   
+{%if subject %}
+
+
+<div class="row">
+ 
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title ">Student  of Semester {{subject.0.sem}}</h4>
+       
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>Subject Name</th>
+              <th>Subject Code</th>
+              <th>Subject Type</th>
+               <th>Marks</th>
+            </thead>
+            <tbody>
+              {% for object in subject %}
+                {% if object.subject_type == 'theory' %}
+                <tr>
+                  <td>{{object.subject_name}}  </td> <td>{{object.subject_code}}  </td><td>{{object.subject_type}}  </td>
+                 <td><a class="btn btn-success" role="button" href="{% url "student_unit_mark" object.year.batch object.sem object.subject_code %}">Unit Mark</a>
+                <a class="btn btn-info" role="button" href="{% url "student_midterm_mark" object.year.batch object.sem object.subject_code %}">Mid Term</a></td> 
+              </tr>
+    
+              {% elif object.subject_type == 'practical' %}
+              <tr>
+              
+                <td>{{object.subject_name}}  </td> <td>{{object.subject_code}}  </td><td>{{object.subject_type}}  </td>
+                
+                <td> <a class="btn btn-success" role="button" href="{% url "student_practical_mark" object.year.batch object.sem object.subject_code %}">Practical Mark</a></td>
+    
+              </tr>
+              {% else  %}
+              <tr>
+              
+                <td>{{object.subject_name}}  </td> <td>{{object.subject_code}}  </td><td>{{object.subject_type}}  </td>
+               
+                <td> <a class="btn btn-success" role="button" href="{% url "student_project_mark" object.year.batch object.sem object.subject_code %}">Project Mark</a></td>
+    
+              </tr>
+              {% endif%}
+            
+            {% endfor %}
+      
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+
+  </div>
+  {% endif%}
+        {%endblock%}

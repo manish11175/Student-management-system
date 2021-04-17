@@ -1,0 +1,102 @@
+  
+{%	extends	"user/ubase.html"	%}
+{% block style%}
+{% endblock %}
+
+{%	block	title	%}student medical{%	endblock	%}
+{% block panel%} Medical {%endblock%}
+
+{%	block	content	%}
+{% include 'messages.html' %}
+{% if medical%}
+
+
+<div class="row">
+ <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title ">Physical DETAILS</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>Blood Group</th>
+              <th>Physical Disability</th>
+              <th>Other</th>
+            </thead>
+            <tbody>
+              
+             
+              <tr>
+                <td> {{medical.blood_group}} </td>
+                <td> {{medical.physical_disable}} </td>
+                <td> {{medical.other_med}} </td> 
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+   
+      
+    
+
+ {%else%}
+
+ <div class="row">
+     <div class="col-md-12">
+       <div class="card">
+         <div class="card-header card-header-primary">
+           <h4 class="card-title">Medical</h4>
+           
+         </div>
+         <div class="card-body">
+           <form class="login-form" method="post" action="{%url "medical_update"	%}">
+             <div class="row">
+
+               <div class="col-md-6">
+                 <div class="form-group">
+                   <label class="bmd-label-floating">Blood Group</label>
+                   <input type="text" name="blood_group" class="form-control" required>
+                 </div>
+               </div>
+               <div class="col-md-6">
+                 <div class="form-group">
+                   <label class="bmd-label-floating"> Physical Disability</label>
+                   <input type="text"  name="physical" class="form-control" required>
+                 </div>
+               </div>
+               
+             </div>
+             <div class="row">
+                 <div class="col-md-6">
+                     <div class="form-group">
+                       <label class="bmd-label-floating">Other</label>
+                       <input type="text"  name="other" class="form-control" required>
+                     </div>
+                   </div>
+           
+              
+              
+             </div>
+
+
+<button type="submit" class="btn btn-primary pull-right" >Save</button>
+
+{%	csrf_token	%}
+</form>
+
+
+</div>
+</div>
+</div>
+
+  {% endif%}
+
+     
+{%endblock%}
+    
+    

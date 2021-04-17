@@ -1,0 +1,242 @@
+{%	extends	"hbase.html"	%}
+{%	block	title	%}My students {% endblock	%}
+{% block style %}
+
+  {%endblock%}
+  {%block panel%}Student  {%endblock%}
+{%block content%}
+
+
+
+{% include 'messages.html' %}
+
+{% include 'hod/student/student_dash.html' %}
+
+
+
+
+{% if student%}
+
+<div class="col-md-12">
+  <div class="row">
+<div class="col-md-4">
+  <div class="card">
+    <img src="/media/{{student.photo}}/" alt="Avatar" style="width:100%;height:auto;">
+   
+  </div>
+ 
+  
+ </div>
+ 
+
+
+        <div class="col-md-8">
+              <div class="card">
+                        <div class="card-header card-header-primary">
+                          <h4 class="card-title">Student of {{request.user.profile.department.upper}} Department</h4>
+                          <p class="card-category">Complete about {{student.enrollment.upper}}</p>
+                        </div>
+                        <div class="card-body">
+                      
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Enrollment</label>
+                                   -  {{student.enrollment.upper}}
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="bmd-label-floating">Name</label>
+                                 - {{request.user.first_name.upper}} {{request.user.last_name.upper}}
+                                </div>
+                              </div>
+                             
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                      <label class="bmd-label-floating">Email </label>
+                                     - {{student.Email.lower}}
+                                    </div>
+                                  </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="bmd-label-floating">Conatct</label>
+                          
+                                  - {{student.phone}}
+                                </div>
+                              </div>
+                             
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                      <label class="bmd-label-floating">Date of Birth</label>
+                                      - {{student.dob}}
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <div class="form-group">
+                                      <label class="bmd-label-floating">Batch -</label>
+                                      {{student.batch}}
+                                    </div>
+                                  </div>
+
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="bmd-label-floating">Gender-</label>
+                                  {{student.gender}} 
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label>About Me</label>
+                                  <div class="form-group">
+                                 Student in {{request.user.profile.department}} department
+                                    
+                                  </div>
+                                </div>
+                       
+                              </div>
+                            </div>
+
+                        </div>
+                      </div>
+        </div>
+      </div> </div>
+
+       {%endif%}
+      
+    
+       {%if family%}
+
+
+         <div class="col-md-12">
+           <div class="card">
+               <div class="card-header card-header-primary">
+                   <h4 class="card-title ">
+                   Family Details
+                   </h4>   
+           </div>
+         
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class=" text-primary">
+                      <th>Family Member</th>
+                     <th> Name</th>
+                     <th> Number</th>
+                     <th> E-mail</th>
+                     <th>Organization</th>
+                     <th>Occupation</th>
+                     <th> Income</th>
+                     <th> Office</th>
+                    </thead>
+                  <tbody>
+                    {%for f in family%}
+                   <tr>
+                     <td>Father</td>
+                     <td> {{f.father_name.upper}} </td>
+                     <td> {{f.father_mob}} </td>
+                     <td> {{f.father_email}} </td>
+                     <td> {{f.father_organi}} </td>
+                     <td> {{f.father_occup}} </td>
+                     <td> {{f.father_income}} </td>
+                     <td> {{f.father_office}} </td>
+                   </tr>
+                   <tr>
+                     <td>Mother</td>
+                     <td>{{f.mother_name.upper}}</td>
+                     <td>{{f.mother_mob}}</td>
+                     <td>{{f.mother_email}}</td>
+                     <td>{{f.mother_organi}}</td>
+                     <td>{{f.mother_occup}}</td>
+                     <td>{{f.mother_income}}</td>
+                     <td>{{f.mother_office}}</td>
+                   </tr>
+                   {%endfor%}
+                  </tbody>
+       
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+         </div>
+       {%endif%}
+
+       {%if address%}
+     <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title ">
+                Address
+                </h4>   
+        </div>
+      
+           <div class="card-body">
+             <div class="table-responsive">
+               <table class="table">
+                 <thead class=" text-primary">
+                  <th>Address Type</th>                 
+                  <th>House  No</th>
+                  <th> Street</th>
+                  <th> City</th>
+                  <th>District</th>
+                  <th>State</th>
+                  <th>Country</th>
+                  <th>Pincode</th>
+                 
+                 </thead>
+               <tbody>
+                 {%for a in address%}
+                <tr>
+                  <td>Address</td>
+                  <td> {{a.house_no}} </td>
+                  <td> {{a.street}} </td>
+                  <td> {{a.city}} </td>
+                  <td> {{a.district}} </td>
+                  <td> {{a.state}} </td>
+                  <td> {{a.country}} </td>
+                  <td> {{a.pincode}} </td>
+                 
+                </tr>
+                {%endfor%}
+                {%if resident%}
+                {%for r in resident%}
+                <tr>
+                  <td>Resident</td>
+                  <td> {{r.house_no}} </td>
+                  <td> {{r.street}} </td>
+                  <td> {{r.city}} </td>
+                  <td> {{r.district}} </td>
+                  <td> {{r.state}} </td>
+                  <td> {{r.country}} </td>
+                  <td> {{r.pincode}} </td>
+                  
+                </tr>
+                {%endfor%}
+                {%endif%}
+               </tbody>
+    
+               </table>
+             </div>
+           </div>
+         </div>
+       </div>
+  
+    {%endif%}
+{%endblock%}
+
+
+
+
+
+
+
+
+
+

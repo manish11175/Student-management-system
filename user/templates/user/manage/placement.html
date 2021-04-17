@@ -1,0 +1,140 @@
+
+    
+{%	extends	"user/ubase.html"	%}
+{% block style%}
+{% endblock %}
+
+{%	block	title	%}student placement {%	endblock	%}
+{% block panel%} Placement{% endblock%}
+{%	block	content	%}
+{% include 'messages.html' %}
+{% if object_list%}
+
+
+    <div class="row">
+     
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title "> Placement Record</h4>
+           
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>Date Of T&P</th>
+      <th>Placement Date</th>
+      <th>Company Name</th>
+      <th>Placement Result</th>
+      <th>Join Date</th>
+      <th>Placement Package</th>
+      <th>Placement  Remark</th>
+                </thead>
+                <tbody>
+                  {% for placement in object_list %}
+                  <tr>
+               
+                <td> {{placement.tnp_date}} </td>
+                <td> {{placement.placement_date}} </td>
+                <td> {{placement.company_name}} </td>
+                <td> {{placement.placement_result}} </td>
+                <td> {{placement.join_date}} </td>
+                <td> {{placement.placement_package}} lakh </td>
+                <td> {{placement.placement_remark}} </td>
+                  </tr>
+                  {% endfor%}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+
+      </div>
+      {% endif%}
+
+
+      
+
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header card-header-primary">
+                     
+                      <p class="card-category">add placement</p>
+                    </div>
+                    <div class="card-body">
+                      <form class="login-form" method="post" action="{%url 'placement_update'%}">
+                    
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">T & P Date</label>
+                              <input type="date" name="tnp_date" class="form-control" required />
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">Placement Date</label>
+                              <input type="date" name="placement_date" required>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">Company Name</label>
+                              <input type="text" name="company_name" required class="form-control">
+                            </div>
+                          </div>
+                          
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="bmd-label-floating">Placement Result</label>
+                                  <select id="role" class="form-control" name="placement_result" required>
+                                    <option value="selected">Selected</option>
+                                    <option value="rejected">Rejected</option>
+                                    
+                                </select>
+                                </div>
+                              </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">Date of Join</label>
+                              <input type="date" name="join_date" class="form-control">
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">Package</label>
+                              <input type="number"step="0.01" name="placement_package" placeholder="in lakh" class="form-control">
+                            </div>
+                          </div>
+                          
+                         
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="bmd-label-floating">Placement Remark</label>
+                                  <input  type="text" name="placement_remark" class="form-control">
+                                </div>
+                              </div>
+                            
+                           
+                           
+                          </div>
+  
+  
+          <button type="submit" class="btn btn-primary pull-right" >Save Result</button>
+          
+          {%	csrf_token	%}
+        </form>
+     
+    
+  </div>
+</div>
+</div>
+{%endblock%}

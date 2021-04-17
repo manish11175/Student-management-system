@@ -1,0 +1,48 @@
+{% extends "tbase.html" %} {% block title %} subject Attendance {% endblock %} {% block style %}
+
+{% endblock%}
+
+{%block panel%}Student Practical{%endblock%}
+ {% block content %}
+    
+ {% include 'messages.html' %}
+
+{% if student%}
+        
+        <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+              <div class="card-header card-header-primary">
+                  <h4 class="card-title ">
+                    Class {{request.user.profile.department.upper}} {{sem}} {{sec}} &nbsp;&nbsp;
+                    Subject - {{subject_id.subject_name}} {{subject_id.subject_code}} ({{subject_id.subject_type}})
+                  </h4>   
+          </div>
+        
+             <div class="card-body">
+               <div class="table-responsive">
+                 <table class="table">
+                   <thead class=" text-primary">
+                    <th>Enrollment</th>
+                    <th>Student name</th>
+                   <th>View Mark</th>
+                   </thead>
+                   <tr>
+                    {% for s in student%}
+                    <td>{{s.enrollment.upper}}</td>
+                    <td>{{s.first_name.upper}} {{s.last_name.upper}}</td>
+                    <td><a class="btn btn-primary" role="button" href="{% url "teacher_student_practical_mark_view" s.enrollment subject_id.subject_code  %}">view</a></td>
+                    </tr>
+                {%endfor%}
+  
+                   </tbody>
+                 </table>
+               </div>
+             </div>
+           </div>
+         </div>
+        </div>
+       {%endif%}
+      
+    
+        {%endblock %}

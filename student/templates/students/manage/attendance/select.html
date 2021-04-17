@@ -1,0 +1,86 @@
+
+{%	extends	"tbase.html"	%}
+{%	block	title	%}student attendance {% endblock	%}
+{% block style %}
+  
+{% endblock%}
+{%block panel%} Attendance {%endblock%}
+{%	block	content	%}		
+
+{% include 'messages.html' %}
+
+
+            
+
+ {% if tg_class %}
+
+
+       
+ <div class="row">
+   <div class="col-md-12">
+     <div class="card">
+         <div class="card-header card-header-primary">
+             <h4 class="card-title ">
+                 {{request.user.profile.department.upper}} Department TG Attendance
+             </h4> 
+           </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                 <th>Batch</th>
+                 <th>Department</th>
+                 
+                 <th>SEM</th>
+                 <th>SEC</th>
+              
+                 <th>Mark</th>
+                 <th>View</th>
+                 
+ 
+               
+              </thead>
+              <tbody>
+                
+                 {% for c in tg_class %}
+                 <tr>
+                 <td>{{c.year}}</td>
+                 <td>{{c.branch.upper}}</td>
+                 <td>{{c.sem}}</td>
+                 <td>{{c.sec}}</td>
+                 <td>
+                     <form method="post" action="{% url 'select_student' request.user.pk%}">
+                     {% csrf_token %}
+                     <input type="hidden" value="{{c.sem}}" name="sem">
+                     <input  type="hidden" value="{{c.year}}" name="batch"  required />
+                     <input type="hidden" value="{{c.sec}}" name="sec">
+                     <button class="btn btn-info" type="submit">+ give</button>
+     
+                 </form>
+             </td>
+             <td>
+              <form method="post" action="{% url 'attendance_view' request.user.pk%}">
+              {% csrf_token %}
+              <input type="hidden" value="{{c.sem}}" name="sem">
+              <input  type="hidden" value="{{c.year}}" name="batch"  required />
+              <input type="hidden" value="{{c.sec}}" name="sec">
+              <button class="btn btn-primary" type="submit">view</button>
+
+          </form>
+      </td>
+            
+                 </tr>
+     
+             {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
+  {%endif%}
+
+{%endblock %}
+
+

@@ -1,0 +1,41 @@
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%} subject {% endblock	%}
+{% block style %}
+{% endblock%}
+{% block panel%} Subject {%endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+
+
+
+
+
+
+
+<div class="row">
+    <div class="col-md-8">
+      <div class="card card-profile">
+          <div class="card-header card-header-primary">
+           <p class="card-category"> Subject of {{request.user.profile.department.upper}} {{sem}}  Sem    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Subject Code - {{subject_code}}</p>
+            </div>
+        <div class="card-body">
+         
+           <div class="row">
+              <div class="col-md-6">
+                <p> Are you sure to delete subject with subject code - {{subject_code}} </p>
+                <button class="btn btn-primary"><a style="color:white;" href="{% url "subject_view" %}">No let me back</a></button>
+                <button class="btn btn-warning"><a style="color:white;" href="{% url "subject_delete_confirm" sem subject_code %}">Confirm Delete</a></button>
+              </div>
+              
+            </div>
+           </div>
+           </div>
+    
+           
+         
+        </div>
+      </div>
+
+
+{% endblock%}

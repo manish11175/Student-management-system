@@ -1,0 +1,107 @@
+
+{%	extends	"tbase.html"	%}
+{%	block	title	%}subject mark {% endblock	%}
+{% block style %}
+{%block panel%}Student Practical Mark{%endblock%}
+{% endblock%}
+{%	block	content	%}		
+{% include 'messages.html' %}
+              
+{% if student%}
+
+
+
+<form method="post" action="{% url "teacher_practical_mark" subject_id.subject_code  sem sec %}"> 
+  {% csrf_token %}
+
+<div class="row">
+ 
+  <div class="col-md-12">
+    <div class="card">
+    <div class="card-header card-header-primary">
+      <h4 class="card-title ">
+        Practical Mark
+      </h4> 
+    </div>
+    <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title ">
+            Class {{request.user.profile.department.upper}} {{sem}} {{sec}} &nbsp;&nbsp;
+            Subject - {{subject_id.subject_name}} {{subject_id.subject_code}} ( {{subject_id.subject_type}} )
+          </h4> 
+        </div>
+      <div class="card-body">
+          
+      <div class="row">
+       <div class="col-md-6">
+            <div class="form-group">
+              <label class="bmd-label-floating">Practical No</label>
+              <input type="=number" name="practical_no"  class="form-control" required />
+            </div>
+          </div>
+          
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="bmd-label-floating">Total Mark</label>
+            <input  type="number" name="total_mark"  class="form-control" required />
+          </div>
+        </div>
+     
+      </div>
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>Enrollment</th>
+              <th>Student name</th>
+              <th>Obtain Mark</th>
+            </thead>
+            <tbody>
+              {% for s in student %}
+              <tr>
+                  <td>{{s.enrollment.upper}}</td>
+              <td>{{s.first_name.upper}} {{s.last_name.upper}}</td>
+              <td>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <input type="number" name="{{ s.enrollment }}" required> 
+              </div>
+              </td>
+              </tr>
+  
+          {% endfor %}
+  
+         
+       
+            </tbody>
+           
+          </table>
+        </div>
+        <td> <button class="btn btn-primary pull-right" type="submit">Submit</button></td>
+      </div>
+    </div>
+  </div>
+ 
+</div>
+  </div>
+
+  </form>
+{% else%}
+<div class="row">
+ 
+  <div class="col-md-12">
+    <div class="card-header card-header-primary">
+      <h4 class="card-title ">
+    Practical Mark {{request.user.profile.department.upper}} {{sem}} {{sec}}
+      </h4> 
+    </div>
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title ">  No Student Found !  </h4>
+       
+      </div></div></div></div>
+  {% endif%}
+
+{%endblock %}
+
+
+
+

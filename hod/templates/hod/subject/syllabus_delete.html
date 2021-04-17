@@ -1,0 +1,42 @@
+
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%} syllabus {% endblock	%}
+{% block style %}
+{% endblock%}
+{% block panel%} Syllabus {%endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+
+
+
+
+
+
+<div class="row">
+    <div class="col-md-8">
+      <div class="card card-profile">
+          <div class="card-header card-header-primary">
+           <p class="card-category">Syllabus of {{request.user.profile.department.upper}} {{sem}}  Sem   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Year - {{year}}</p>
+            </div>
+        <div class="card-body">
+         
+           <div class="row">
+              <div class="col-md-6">
+                <p> Are you sure delete syllabus of {{sem}} sem </p>
+                <button class="btn btn-primary" ><a style="color:white;" href="{% url "syllabus_view" %}">No let me back</a></button>
+                <button class="btn btn-warning" ><a style="color:white;" href="{% url "syllabus_delete_confirm" sem %}">Confirm Delete</a></button>
+             
+                </div>
+              
+            </div>
+           </div>
+           </div>
+    
+           
+         
+        </div>
+      </div>
+
+
+{% endblock%}

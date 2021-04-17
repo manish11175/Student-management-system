@@ -1,0 +1,103 @@
+
+
+{%	extends	"hbase.html"	%}
+{% block style%}
+img {
+    border-radius: 50%;
+  }
+{% endblock %}
+
+{%	block	title	%}faculty{%	endblock	%}
+{% block panel %}Faculty ReQuest{% endblock%}
+{%	block	content	%}
+        
+{% include 'messages.html' %}
+            
+    
+    {% if faculty%}
+
+
+    <form action="{% url 'faculty_account_activate'%}" method="post">
+      {% csrf_token %}
+    <div class="row">
+     
+      <div class="col-md-12">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title ">
+            Faculty Account activation request in {{ request.user.profile.department.upper }}
+          </h4> 
+        </div>
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Activate Account</h4>
+           
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>Image</th>
+                <th>Username</th>
+                <th>Name</th>
+               <th >Email</th>
+                <th>Activate Account</th>
+                </thead>
+                <tbody>
+               
+                  {% for f in faculty %}
+                  <tr>
+                   
+                  <td><img src="/media/{{f.profile.photo}}/"class="rounded mx-auto d-block" width="100px" height="100px"></td>
+                  <td>{{f.username}}</td>
+                  <td>{{f.first_name.upper}} {{f.first_name.upper}}</td>
+                  
+                 <td>{{f.email}}</td>
+                 <td>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-outline-danger">
+                          <input type="radio" name="{{ s.username }}" id="option1" autocomplete="off" value="False"checked> Deactivate
+                      </label>
+                <label class="btn btn-outline-primary active">
+                              <input type="radio" name="{{ f.username }}" id="option2" autocomplete="off" value="True" >Activate
+                          </label>
+  
+                      </div>
+                             
+              </td>
+                
+                  </tr>
+  
+              {% endfor %}
+            
+            <tr>
+              <td> <button class="btn btn-primary" type="submit">Submit</button></td>
+            </tr>
+                </tbody>
+               
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+    
+      </div>
+
+      </form>
+    {% else%}
+    <div class="row">
+     
+      <div class="col-md-12">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title ">
+            Faculty Account activation request in {{ request.user.profile.department.upper }}
+          </h4> 
+        </div>
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">No Faculty request Found</h4>
+           
+          </div></div></div></div>
+      {% endif%}
+            
+{%	endblock	%}

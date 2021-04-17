@@ -1,0 +1,60 @@
+{%	extends	"tbase.html"	%}
+{%	block	title	%}My students {% endblock	%}
+{%	block	content	%}		
+
+
+<div class="card-body">
+    <div class="form">
+          <a class="btn btn-dark" role="button" href="{%	url	"student_create"  %}"	class="button">Add New Student</a>
+     
+
+        <form class="login-form" action="" method="GET">
+           
+            {{ form }}
+            <button class="btn" type="submit">Search</button>
+            </fieldset>
+        </form>
+        <table class="table table-bordered table-condensed">
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+               
+            </tr>
+            {% for object in object_list %}
+            <tr>
+                <td>{{object.first_name}}</td>
+                <td>{{object.last_name}}</td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+    
+        {% if is_paginated %}
+            {% include "paginator.html" %}
+        {% endif %}
+    
+       </div>
+     </div>
+
+<br><br>
+
+
+
+
+{%	for	student	in	object_list%}
+<div class="student-info my-2 ">
+<h3><a href="{% url "teacher_student_dash" student.enrollment %}">{{student.enrollment}}</a></h3>								
+<div>
+     <a class="btn btn-info" href="{%url "student_edit" student.enrollment	%}" role="button">EDIT</a>
+     <a class="btn btn-danger" href="{%	url	"student_delete"	student.enrollment	%}" role="button">Delete</a>
+</div>						
+</div>
+{%empty%}
+<p>You	haven't	add	any	student	yet.</p>				
+{%	endfor	%}	
+			
+	
+</div>
+{%endblock %}
+
+

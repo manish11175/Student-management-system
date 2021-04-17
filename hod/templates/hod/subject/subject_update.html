@@ -1,0 +1,56 @@
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%} subject {% endblock	%}
+{% block panel%} Subject{%endblock%}
+{% block style %}
+{% endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card card-profile">
+        <div class="card-header card-header-primary">
+         <p class="card-category"> Subject of {{request.user.profile.department.upper}} {{sem}}  Sem    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Subject Code - {{subject_code}}</p>
+          </div>
+      <div class="card-body">
+        <form class="login-form" method="POST" action="{% url 'subject_update' sem subject_code %}" enctype="multipart/form-data">
+         <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label class="bmd-label-floating"> Subject Name</label>
+                  <input type="text" name="subject_name" required class="form-control">
+                </div>
+            </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Subject Type</label>
+                    <select id="subject_type" name="subject_type" required>
+                      <option value="theory">Theory</option>
+                      <option value="practical">Practicle</option>
+                      <option value="minor project">Minor Project</option>
+                      <option value="major project">Major Project</option>
+                  </select>
+                   
+                  </div>
+         </div>
+         </div>
+  
+         
+            
+              <button type="submit" class="btn btn-primary" >Update</button>
+              
+    {%	csrf_token	%}
+            </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+</div>
+{% endblock%}

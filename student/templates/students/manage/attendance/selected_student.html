@@ -1,0 +1,108 @@
+
+{%	extends	"tbase.html"	%}
+{%	block	title	%} attendance {% endblock	%}
+{% block style %}
+{% endblock%}
+{%block panel%}Attendance{% endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+
+
+
+
+ 
+{% if student%}
+
+
+<form action="{% url 'student_attendance'%}" method="post">
+  {% csrf_token %}
+  <input type="hidden" value="{{student.0.sem}}" name="sem"/>
+  <input type="hidden" value="{{student.0.batch}}" name="batch"/>
+ <input type="hidden" value="{{student.0.sec}}" name="sec"/>
+<div class="row">
+ 
+  <div class="col-md-12">
+    <div class="card">
+    <div class="card-header card-header-primary">
+      <h4 class="card-title ">
+    Attendance  {{ request.user.profile.department.upper }} {{student.0.sem}} {{student.0.sec}}_________  Batch {{student.0.batch}}
+      </h4> 
+    
+    </div>
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title ">Enter Date: </label> <input type="date" name="date" required></h4>
+       
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+                <th>Enrollment</th>
+                <th>Student name</th>
+                <th>Attendance</th>
+            </thead>
+            <tbody>
+           
+                {% for s in student %}
+            <tr>
+                <td>{{s.enrollment.upper}}</td>
+            <td>{{s.first_name.upper}} {{s.last_name.upper}}</td>
+            <td>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+                        <label class="btn btn-outline-success active">
+                            <input type="radio" name="{{ s.enrollment }}" id="option1" autocomplete="off" value="1" checked> Present
+                        </label>
+
+                        <label class="btn btn-outline-info">
+                            <input type="radio" name="{{ s.enrollment }}" id="option2" autocomplete="off" value="0.5"> Half-Day
+                        </label> 
+
+                        <label class="btn btn-outline-danger">
+                            <input type="radio" name="{{ s.enrollment }}" id="option3" autocomplete="off" value="0"> Absent
+                        </label>
+                </div>
+            </td>
+            </tr>
+
+        {% endfor %}
+        
+  
+         
+       
+            </tbody>
+           
+          </table>
+        </div>
+        <td> <button class="btn btn-primary pull-right" type="submit">Submit</button></td>
+      </div>
+    </div>
+  </div>
+ 
+</div>
+  </div>
+
+  </form>
+{% else%}
+<div class="row">
+ 
+  <div class="col-md-12">
+    <div class="card-header card-header-primary">
+      <h4 class="card-title ">
+      Attendance in Department
+      </h4> 
+    </div>
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title ">  No Student Found !  </h4>
+       
+      </div></div></div></div>
+  {% endif%}
+
+
+{%endblock %}
+
+
+
+

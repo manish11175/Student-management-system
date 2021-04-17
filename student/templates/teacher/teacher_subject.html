@@ -1,0 +1,106 @@
+
+{%	extends	"tbase.html"	%}
+{%	block	title	%}teacher subject {% endblock	%}
+{% block style %}
+
+{% endblock%}
+{%block panel%} Subject{%endblock%}
+{%	block	content	%}		
+
+{% include 'messages.html' %} 
+
+
+{% if subject %}
+
+<div class="row">
+  
+  
+    
+  <div class="col-md-12">
+  
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title "> My Subejct </h4>
+       
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>Class</th>
+              <th>Subject Name</th>
+               <th>Mark Attendance</th>
+               <th>View Attendance</th>
+               <th>Mark</th>
+               <th>View Mark</th>
+             
+            </thead>
+            <tbody>
+             
+              {% for objects in subject %}
+              {%for object in objects%}
+              {% if object.subject_id.subject_type == 'theory' %}
+              
+                <tr>
+                  
+                    <td>{{object.class_id.branch.upper}} {{object.class_id.sem}} {{object.class_id.sec}}</td>
+                    <td>{{object.subject_id.subject_name}} {{object.subject_id.subject_code}} ({{object.subject_id.subject_type}})</td>
+                  
+                    
+                    <td><a class="btn btn-info" role="button" href="{% url "subject_attendance" object.subject_id.subject_code  object.class_id.sem object.class_id.sec %}"><i class="fa fa-plus"></i> Mark Attend</a></td>
+                    <td><a class="btn btn-primary" role="button" href="{% url "subject_attendance_view" object.subject_id.subject_code  object.class_id.sem object.class_id.sec %}"><i class="fa fa-eye"></i> view</a></td>
+                    <td><a class="btn btn-info" role="button" href="{% url "teacher_subject_mark" object.subject_id.subject_code object.class_id.sem object.class_id.sec %}"><i class="fa fa-plus"></i> Unit</a>
+                    <a class="btn btn-info" role="button" href="{% url "teacher_subject_midterm" object.subject_id.subject_code object.class_id.sem object.class_id.sec %}"><i class="fa fa-plus"></i> Mid </a></td>
+                    <td><a class="btn btn-success" role="button" href="{% url "teacher_subject_midterm_view" object.subject_id.subject_code object.class_id.sem object.class_id.sec %}"><i class="fa fa-eye"></i> MidTerm</a>
+                      <a class="btn btn-success" role="button" href="{% url "teacher_unit_mark_view" object.subject_id.subject_code object.class_id.sem object.class_id.sec %}"><i class="fa fa-eye"></i> Unit </a></td>
+                  </tr>
+      
+                  {% elif object.subject_id.subject_type == 'practical' %}
+                  <tr>
+                  
+                    <td>{{object.class_id.branch.upper}} {{object.class_id.sem}} {{object.class_id.sec}}</td>
+                    <td>{{object.subject_id.subject_name}} {{object.subject_id.subject_code}} ({{object.subject_id.subject_type}})</td>
+                    
+                    <td><a class="btn btn-info" role="button" href="{% url "subject_attendance" object.subject_id.subject_code  object.class_id.sem object.class_id.sec %}"><i class="fa fa-plus"></i> Mark Attend</a></td>
+                    <td><a class="btn btn-primary" role="button" href="{% url "subject_attendance_view" object.subject_id.subject_code  object.class_id.sem object.class_id.sec %}"><i class="fa fa-eye"></i> view</a></td>
+                    <td><a class="btn btn-info" role="button" href="{% url "teacher_practical_mark" object.subject_id.subject_code  object.class_id.sem object.class_id.sec %}"><i class="fa fa-plus"></i> Practical Mark </a></td>
+                    <td><a class="btn btn-success" role="button" href="{% url "teacher_practical_mark_view" object.subject_id.subject_code object.class_id.sem object.class_id.sec %}"><i class="fa fa-eye"></i> Practical</a></td>
+                  </tr>
+                  {% else  %}
+                  <tr>
+                  
+                    <td>{{object.class_id.branch.upper}} {{object.class_id.sem}} {{object.class_id.sec}}</td>
+                    <td>{{object.subject_id.subject_name}} {{object.subject_id.subject_code}} ({{object.subject_id.subject_type}})</td>
+                    
+                    <td><a class="btn btn-info" role="button" href="{% url "subject_attendance" object.subject_id.subject_code  object.class_id.sem object.class_id.sec %}"><i class="fa fa-plus"></i> Mark Attend</a></td>
+                    <td><a class="btn btn-primary" role="button" href="{% url "subject_attendance_view" object.subject_id.subject_code  object.class_id.sem object.class_id.sec %}"><i class="fa fa-eye"></i> view</a></td>
+                    <td><a class="btn btn-info" role="button" href="{% url "teacher_project_mark" object.subject_id.subject_code  object.class_id.sem object.class_id.sec %}"><i class="fa fa-plus"></i> Project Mark </a></td>
+                    <td><a class="btn btn-success" role="button" href="{% url "teacher_project_mark_view" object.subject_id.subject_code object.class_id.sem object.class_id.sec %}"><i class="fa fa-eye"></i> Project</a></td>
+      
+                  </tr>
+                  {% endif%}
+             
+                {% endfor %}
+               
+                {%endfor%}
+      
+        
+          
+      
+           </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+  {% endif%}
+
+
+{%endblock %}
+
+
+
+

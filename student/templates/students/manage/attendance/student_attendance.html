@@ -1,0 +1,137 @@
+{%	extends	"tbase.html"	%}
+{%	block	title	%}attendance{%	endblock	%}
+
+{%	block	content	%}
+
+{% include 'messages.html' %}
+{% include 'students/manage/student/student_dash.html' %}
+  <div class="row ">
+  
+       
+        <div class="card my-4" style="max-width: 500px;margin:auto;" >
+          <div class="card-header card-header-primary">
+            <h4 class="card-title"> Semester Attendance</h4>
+          </div>
+          <div class="card-body">
+          <form class="login-form" method="POST" action="{% url 'teacher_student_sem_attendance' student.enrollment %}" enctype="multipart/form-data">
+           
+            <div>
+              <br>
+                <label for="cars">Semester</label>
+                <select id="role" name="sem" class="form-control" required>
+                    <option value="1">I</option>
+                    <option value="2">II</option>
+                    <option value="3">III</option>
+                    <option value="4">IV</option>
+                    <option value="5">V</option>
+                    <option value="6">VI</option>
+                    <option value="7">VII</option>
+                    <option value="8">VIII</option>
+                    
+                </select>
+    
+            </div>
+    
+        
+           <button type="submit" class="btn btn-primary" >Attendance</button>
+            
+            {%	csrf_token	%}
+          </form>
+        </div>
+      </div>
+      </div>
+
+
+
+    {% if attendance%}                   	
+
+
+
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="card">
+       <div class="card-header card-header-primary">
+         <h4 class="card-title ">Sem Attendance</h4> 
+         <p class="card-category">Total Class - {{ total_class }}  &nbsp;&nbsp;&nbsp;
+           Attend Class - {{ att_class }} &nbsp;&nbsp;&nbsp;
+         
+   Attendance - {{ attendance }} % &nbsp;&nbsp;&nbsp;
+   Class to Attend - {{ cta }}
+         </p>
+        
+       </div>
+       <div class="card-body">
+         <div class="table-responsive">
+           <table class="table">
+             <thead class=" text-primary">
+              <th>S.NO</th>
+              <th>Date</th>
+              <th>Day</th>
+              <th> Status</th>
+              
+             </thead>
+             <tbody>
+               
+              {% for a in attend %}
+           
+              <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{a.date}}</td>
+              <td>{{ a.date|date:"l" }}</td>
+              <td>{{a.attend}}</td>
+              </tr>
+          
+          {% endfor %}
+             </tbody>
+           </table>
+         </div>
+       </div>
+     </div>
+   </div>
+  </div>
+ 
+
+
+
+
+  <div id="container" style="width: 50%; margin-left:250px;">
+    <canvas id="pie-chart"></canvas>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <script>
+  var config = {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: {{ data|safe }},
+          backgroundColor: [
+            '#252525', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3'
+          ],
+          label: 'sem'
+        }],
+        labels: {{ labels|safe }}
+      },
+      options: {
+        responsive: true
+      }
+    };
+  
+    window.onload = function() {
+      var ctx = document.getElementById('pie-chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+  
+  </script>
+  
+  
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  
+  
+{% endif %}
+
+
+        {%endblock%}

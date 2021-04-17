@@ -1,0 +1,110 @@
+{%	extends	"tbase.html"	%}
+{% block style%}
+
+
+{% endblock %}
+{%block panel%}Add Student {%endblock%}
+{%	block	title	%}add student {%	endblock	%}
+{%	block	content	%}
+{% include 'messages.html' %}
+
+
+
+<div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title">Add New Student</h4>
+         
+        </div>
+        <div class="card-body">
+            <form  method="POST" action="{% url 'student_create' }" enctype="multipart/form-data">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Course</label>
+                  <select name="course" class="form-control" required>
+                      <option value="x">High School</option>
+                      <option value="xii"> High School XII</option>
+                      <option value="diploma">Diploma</option>
+                      <option value="ug">UG</option>
+                      <option value="pg">PG</option>
+                      <option value="jee">JEE</option>
+                      <option value="gate">GATE</option>
+                      <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Roll no</label>
+                  <input type="text" name="roll_no" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Rank</label>
+                  <input type="number"  name="rank" class="form-control" required>
+                </div>
+              </div>
+              
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Board</label>
+                      <input type="text"  name="board" class="form-control" required>
+                    </div>
+                  </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Year of Passing</label>
+                  <input type="text" name="year_of_passing" class="form-control" required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Total Mark</label>
+                  <input type="number" name="total_mark" class="form-control" required>
+                </div>
+              </div>
+              
+             
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Obtain Mark</label>
+                      <input type="number" name="obtain_mark" class="form-control" required>
+                    </div>
+                  </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Percent</label>
+                    <input type="number" name="percent" class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Marksheet</label>
+                    <input type="file" name="marksheet"class="form-control" required>
+                  </div>
+                </div>
+               
+               
+              </div>
+
+
+<button type="submit" class="btn btn-primary pull-right" >Save Result</button>
+
+{%	csrf_token	%}
+</form>
+
+
+</div>
+</div>
+</div>
+
+{%endblock%}
+    
+    

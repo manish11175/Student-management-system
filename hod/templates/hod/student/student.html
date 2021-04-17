@@ -1,0 +1,127 @@
+
+{%	extends	"hbase.html"	%}
+{%	block	title	%}student {% endblock	%}
+{% block style %}
+{% endblock%}
+{% block panel%} {{request.user.profile.department.upper}} Department Student{%endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+
+<div style="overflow-x:auto;" class="row">
+       
+    <div class="col-md-12">
+     
+         <form class="form-inline" action="{%url "department_student" request.user.profile.department %}" method="get">
+            <div class="card">
+            <div class="card-body">
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+            
+                  <input type="number" name="batch" placeholder="batch"  class="form-control" id="batch">
+                </div>
+              </div>
+                <div class="col-md-3">
+                    <div class="form-group">   
+                        <select id="role" class="form-control" name="sem">
+                            <option vlaue="">Select Sem</option>
+                          <option value="1">I</option>
+                          <option value="2">II</option>
+                          <option value="3">III</option>
+                          <option value="4">IV</option>
+                          <option value="5">V</option>
+                          <option value="6">VI</option>
+                          <option value="7">VII</option>
+                          <option value="8">VIII</option>
+                          
+                      </select>
+                      </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                         <select id="role" name="sec" class="form-control">
+                          <option value="">Select Sec</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        
+                    </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                     
+                      <input type="text" name="query" placeholder="search"  class="form-control" id="query">
+                    </div>
+
+                  </div>
+ 
+            </div>
+            <button  class="btn btn-primary pull-right" type="submit"><i class="fa fa-search"></i> Search</button>
+
+        </div></div>
+         </form>
+         </div>
+      </div>
+
+      
+    {%if student %}
+
+
+    <div class="row">
+     
+      <div class="col-md-12">
+        
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title "> Student In {{ request.user.profile.department.upper }} Department</h4>
+           
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                <th>Photo</th>
+                <th>Enrollment</th>
+                <th>Name</th>
+                <th>Mobile No</th>
+                <th>Batch</th>
+                <th>Sem</th>
+                <th>Sec</th>
+                <th>TG</th>
+                <th>Attendance</th>
+                <th>View</th>
+                
+                
+                </thead>
+                <tbody>
+                  {% for s in student %}
+                <tr>
+                    <td><img src="/media/{{s.photo}}/"class="rounded mx-auto d-block" width="100px" height="100px"></td>
+                <td>{{s.enrollment}} </td>
+                <td>{{s.first_name.upper}} {{s.last_name.upper}}</td>
+               <td>{{s.phone}}</td>
+               <td>{{s.batch}}</td>
+               <td>{{s.sem}}</td>
+               <td>{{s.sec}}</td>
+               <td>{{s.owner.first_name}} {{s.owner.last_name}}</td>
+               <td><a class="btn btn-info" role="button" href="{%url	"hod_student_attendance" s.enrollment	%}"  ><i class="fa fa-line-chart"></i> Attendance</a></td>
+               <td><a href="{%url "hod_student_view" s.enrollment %}" role="button" class="btn btn-primary">view</a></td>
+               
+                </tr>
+                {% endfor %}
+          
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+    
+      </div>
+      {% endif%}
+    
+
+{%endblock%}

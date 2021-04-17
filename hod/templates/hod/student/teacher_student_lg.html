@@ -1,0 +1,116 @@
+{%	extends	"hbase.html"	%}
+{% block style%}
+
+{% endblock %}
+{%block panel%}Student Local Guardian{%endblock%}
+
+{%	block	title	%}lg {%	endblock	%}
+{%	block	content	%}
+{% include 'messages.html' %}
+
+{% include 'hod/student/student_dash.html' %}
+
+
+
+    
+    
+    {% if lg%}
+
+
+    <div class="row">
+     <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Student Local Guardian</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                    <th>Local Gaurdian Name</th>
+                    <th>Contact Number</th>
+                    <th>Address</th>
+                      <th>Relation with Student</th>
+                      <th>Update</th>
+                </thead>
+                <tbody>
+                  
+                 
+                  <tr>
+                    <td> {{lg.local_guard_name}} </td>
+                    <td> {{lg.guard_mob}} </td>
+                    <td> {{lg.guard_address}} </td>
+                    <td> {{lg.stu_rela_guard}} </td> 
+                    <td><a class="btn btn-primary" href="{% url "hod_student_lg_edit" student.enrollment  %}" role="button">EDIT</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+     </div>
+    
+      
+    
+
+  {%else%}
+
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Local Guardian </h4>
+                  
+                </div>
+                <div class="card-body">
+                  <form class="login-form" method="post" action="{%url "hod_student_lg"	student.enrollment	%}">
+                    <div class="row">
+
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Local Guardian Name</label>
+                          <input type="text" name="lg_name" class="form-control" required>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating"> Guardian Contact No</label>
+                          <input type="text"  name="lg_mob" class="form-control" required>
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="bmd-label-floating">Guardian Address</label>
+                              <input type="text"  name="lg_address" class="form-control" required>
+                            </div>
+                          </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Relation With Student</label>
+                          <input type="text" name="stu_lg" class="form-control" required>
+                        </div>
+                      </div>
+                      
+                     
+                     
+                    </div>
+  
+  
+      <button type="submit" class="btn btn-primary pull-right" >Save</button>
+      
+      {%	csrf_token	%}
+    </form>
+ 
+
+</div>
+</div>
+</div>
+
+{% endif%}
+{%endblock%}
+    
+    

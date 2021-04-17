@@ -1,0 +1,57 @@
+
+{%extends "tbase.html"%}
+
+{%	block	title	%}student{%	endblock	%}
+{%block panel%}Add Student{%endblock%}
+{%block style%}
+.form select
+{
+ width:100%;
+}
+.form {
+  background-image: linear-gradient(to top, #9c27b0 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px);
+  background: no-repeat center bottom, center calc(100% - 1px);
+}
+}
+{%endblock%}
+	
+
+{%	block content %}	
+{% include 'messages.html' %}
+
+
+
+
+
+  <div class="row">
+    <div class="col-md-12">
+    
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title">Add a new Student</h4>
+          
+        </div>
+  
+        <div class="card-body">
+        
+            <form	action="" class="form"	enctype="multipart/form-data" method="post">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  {{	form.as_p	}}
+                  {%	csrf_token	%}	
+                </div>
+              </div>
+              <button class="btn btn-primary pull-right" type="submit" >submit</button>
+          </div>
+
+              
+             
+              
+              
+            </form>
+          </div>
+        </div>
+    </div>
+
+{% endblock%}

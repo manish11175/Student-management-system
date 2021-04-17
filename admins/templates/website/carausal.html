@@ -1,0 +1,203 @@
+
+{%	extends	"abase.html"	%}
+{%	block	title	%}website {% endblock	%}
+{% block script %}
+var modal = document.getElementById('id01');
+    
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+{% endblock %}
+
+{% block style %}
+
+* {box-sizing: border-box}
+/* Full-width input fields */
+  input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f7f4f6;
+}
+
+/* Add a background color when the inputs get focus */
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.6);
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  
+
+  border: 1px solid #888;
+  max-width:600px;/* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color:white;
+}
+
+.close:hover,
+.close:focus {
+  color: white;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+    width: 100%;
+  }
+}
+{% endblock%}
+{%	block	content	%}	
+{% include 'messages.html' %}
+
+<!-- The Modal (contains the Sign Up form) -->
+<div id="id01" class="modal">
+    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal" aria-hidden="true">X</span>
+    <form class="modal-content mx-auto my-auto" action="{%url "carausal" %}" enctype="multipart/form-data" method="POST">
+      <div class="container">
+        <h1>Update Slide</h1>
+        <label for="email"><b>Slide</b></label>
+        <select class="form-control" name="slide_no" required>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+  </select>
+
+
+        <label for="email"><b>Title</b></label>
+        <input type="text" placeholder="Title" name="title" class="form-control" required>
+    
+        <label for="psw"><b>Description</b></label>
+        <input type="text" placeholder="Description" name="description" class="form-control"  required>
+    
+        <label for="psw-repeat"><b>Image</b></label>
+        <input type="file" accept="image/*" name="image" class="form-control"  required>
+    
+        <div class="clearfix">
+          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="btn btn-danger">Cancel</button>
+        <button class="btn btn-primary" type="submit">Update</button>
+        </div>
+      </div>
+      {% csrf_token %}
+    </form>
+  </div>
+
+ 
+     
+    
+  
+
+
+{%if carausal%}
+
+<div class="row">
+    <div class="col-md-12">
+<div class="card">
+    <div class="card-header card-header-primary">
+     <h4 class="card-title">Carausal</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+                <th>Slide</th>
+                <th>Photo</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Edit</th>
+             
+            </thead>
+            <tbody>
+              
+             
+                {% for c in carausal %}
+                <tr>
+                    <td>{{c.slide_no}}</td>
+                    <td><img src="/media/{{c.image}}/"class="rounded d-block" width="200px" height="100px"></td>
+                  <td>{{c.title}}</td>
+               <td>{{c.description}}</td>
+               <td><button class="btn btn-primary" onclick="document.getElementById('id01').style.display='block'">edit</button></td>
+                </tr>
+
+            {% endfor %}
+            
+          
+            </tbody>
+          </table>
+        </div>
+      </div>
+    
+    </div>
+    </div>
+
+    
+    </div>
+    
+{%endif%}
+
+
+{%endblock%}
